@@ -1,0 +1,3045 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dewan Mahasiswa — Organisasi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet"/>
+
+<style>
+
+/* ─── TOKENS ─── */
+:root {
+  --bg:        #faf7f7;
+  --bg2:       #f2ecec;
+  --surface:   #ffffff;
+  --ink:       #15100f;
+  --ink2:      #3a2828;
+  --muted:     #8a7878;
+  --line:      #e8dada;
+  --blue:      #C41E0E;   /* merah cabe */
+  --blue-lt:   #fdecea;
+  --blue-dk:   #9e1508;
+  --bag:       #1B3F72;   /* blue bag */
+  --bag-lt:    #e8eef8;
+  --bag-dk:    #122c55;
+  --tag-bg:    #fff0ee;
+  --tag-ink:   #9e1508;
+  --r:         16px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px;}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:64px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:0 5%;
+  background:rgba(250,247,247,0.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);
+}
+.logo{
+  font-family:'Fraunces',serif;
+  font-size:1.1rem;
+  font-weight:600;
+  color:var(--ink);
+  letter-spacing:-0.01em;
+  display:flex;align-items:center;gap:0.5rem;
+  white-space:nowrap;
+}
+.logo-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--blue);
+  flex-shrink:0;
+  display:inline-block;
+}
+.nav-links{
+  display:flex;gap:0.15rem;
+  justify-content:center;
+  align-items:center;
+}
+.nav-links a{
+  padding:0.45rem 1rem;
+  color:var(--ink2);
+  text-decoration:none;
+  font-size:0.78rem;
+  font-weight:600;
+  border-radius:99px;
+  transition:background 0.2s,color 0.2s;
+  white-space:nowrap;
+}
+.nav-links a:hover{background:var(--bg2);color:var(--ink);}
+.nav-pill{
+  padding:0.45rem 1.1rem;
+  background:var(--bag);
+  color:#fff;
+  font-size:0.78rem;
+  font-weight:600;
+  border-radius:99px;
+  text-decoration:none;
+  transition:background 0.2s;
+}
+.nav-pill:hover{background:var(--bag-dk);}
+
+
+/* ─── HERO H1 + LOGO ROW ─── */
+.hero-h1-row{
+  display:flex;
+  align-items:center;
+  gap:2.5rem;
+  margin-bottom:2rem;
+  position:relative;
+}
+.hero-side-logo{
+  width:auto;
+  height:clamp(120px,14vw,300px);
+  object-fit:contain;
+  flex-shrink:0;
+  filter:drop-shadow(0 8px 24px rgba(0,0,0,0.5));
+}
+
+/* ─── NAV LOGO IMG ─── */
+.logo-img{
+  width:28px;height:28px;
+  border-radius:50%;
+  object-fit:cover;
+  flex-shrink:0;
+}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:flex-end;
+  padding:0 5% 8vh;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#0d2040 0%,#12233d 60%,#1a0a0a 100%);
+}
+.hero-bg-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(100px);
+  pointer-events:none;
+}
+.b1{width:500px;height:500px;background:rgba(196,30,14,0.35);top:-100px;right:-100px;animation:float1 9s ease-in-out infinite alternate;}
+.b2{width:350px;height:350px;background:rgba(27,63,114,0.45);bottom:0;left:10%;animation:float2 11s ease-in-out infinite alternate;}
+@keyframes float1{from{transform:translate(0,0);}to{transform:translate(-40px,50px);}}
+@keyframes float2{from{transform:translate(0,0);}to{transform:translate(30px,-30px);}}
+
+.hero-eyebrow{
+  font-size:0.72rem;
+  font-weight:600;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
+  margin-bottom:1.5rem;
+  position:relative;
+  animation:fadeUp 0.7s ease both;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,5vw,5rem);
+  font-weight:300;
+  line-height:1.0;
+  letter-spacing:-0.02em;
+  color:#fff;
+  position:relative;
+  margin-bottom:0;
+  animation:fadeUp 0.7s 0.1s ease both;
+}
+.hero h1 em{
+  font-style:italic;
+  color:rgba(255,255,255,0.4);
+}
+.hero-sub{
+  max-width:480px;
+  color:rgba(255,255,255,0.45);
+  font-size:0.95rem;
+  line-height:1.75;
+  position:relative;
+  margin-bottom:3rem;
+  font-weight:300;
+  animation:fadeUp 0.7s 0.2s ease both;
+}
+.hero-chips{
+  display:flex;gap:0.6rem;flex-wrap:wrap;
+  position:relative;
+  animation:fadeUp 0.7s 0.3s ease both;
+}
+.chip{
+  padding:0.5rem 1.1rem;
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:99px;
+  font-size:0.78rem;
+  font-weight:500;
+  color:rgba(255,255,255,0.6);
+  cursor:pointer;
+  text-decoration:none;
+  transition:background 0.2s,border-color 0.2s,color 0.2s;
+}
+.chip:hover,.chip.active{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.35);color:#fff;}
+.chip.cta{background:var(--blue);border-color:var(--blue);color:#fff;}
+.chip.cta:hover{background:var(--blue-dk);}
+.chip.bag{background:var(--bag);border-color:var(--bag);color:#fff;}
+.chip.bag:hover{background:var(--bag-dk);}
+
+.hero-scroll{
+  position:absolute;bottom:2.5rem;right:5%;
+  writing-mode:vertical-rl;
+  font-size:0.68rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.25);
+  display:flex;align-items:center;gap:0.6rem;
+  animation:fadeIn 1s 0.8s ease both;
+}
+.hero-scroll::before{
+  content:'';
+  width:1px;height:50px;
+  background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.3));
+  animation:growLine 1.5s 1s ease both;
+}
+@keyframes growLine{from{height:0;}to{height:50px;}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+/* ─── SECTION WRAPPERS ─── */
+.section{padding:100px 5%;}
+.section-inner{max-width:1140px;margin:0 auto;}
+
+.s-eyebrow{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.7rem;font-weight:600;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--blue);
+  margin-bottom:0.8rem;
+}
+.s-eyebrow::before{
+  content:'';width:20px;height:2px;
+  background:var(--blue);border-radius:2px;
+}
+.s-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.8rem,3.5vw,3rem);
+  font-weight:300;
+  line-height:1.15;
+  letter-spacing:-0.015em;
+  color:var(--ink);
+  margin-bottom:0.6rem;
+}
+.s-title em{font-style:italic;color:var(--muted);}
+.s-desc{
+  font-size:0.9rem;
+  color:var(--muted);
+  line-height:1.8;
+  max-width:520px;
+}
+.s-header{margin-bottom:3.5rem;}
+
+/* ─── DIVIDER ─── */
+hr.dim{border:none;border-top:1px solid var(--line);margin:3rem 0;}
+
+/* ─── PROFIL DEWAN ─── */
+#profil{background:var(--surface);}
+
+/* KaDe card */
+.kade-wrap{
+  display:grid;grid-template-columns:auto 1fr;gap:2.5rem;
+  padding:2.5rem;
+  border-radius:var(--r);
+  border:1px solid var(--line);
+  background:var(--bg);
+  margin-bottom:2.5rem;
+  position:relative;overflow:hidden;
+}
+.kade-wrap::after{
+  content:'Ketua Dewan';
+  position:absolute;top:1.8rem;right:2rem;
+  font-size:0.65rem;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--blue);
+  background:var(--blue-lt);
+  padding:0.25rem 0.75rem;
+  border-radius:99px;
+}
+.ava{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue) 0%,#e85a4d 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;
+  font-size:1.6rem;font-weight:600;
+  color:#fff;flex-shrink:0;
+  overflow:hidden;
+  position:relative;
+}
+.ava img{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:50%;
+  /* hide initials text when photo loads */
+  z-index:1;
+}
+/* Ring border on photo avatars */
+.ava img ~ *{ display:none; } /* hide initials span when img present */
+.ava.sm{width:52px;height:52px;font-size:1rem;}
+.ava.blue{background:linear-gradient(135deg,var(--bag),#3a6fbd);}
+.ava.teal{background:linear-gradient(135deg,#0d9488,#2dd4bf);}
+.ava.violet{background:linear-gradient(135deg,#7c3aed,#a78bfa);}
+.ava.rose{background:linear-gradient(135deg,var(--blue),#e85a4d);}
+.ava.amber{background:linear-gradient(135deg,#d97706,#fbbf24);}
+.ava.slate{background:linear-gradient(135deg,var(--bag-dk),#3a6fbd);}
+.ava.green{background:linear-gradient(135deg,#15803d,#4ade80);}
+/* Photo ring — shows when avatar has a real photo */
+.ava.has-photo{
+  box-shadow:0 0 0 2px var(--surface), 0 0 0 3.5px var(--line);
+}
+.person-role{font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:0.3rem;}
+.person-name{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;color:var(--ink);letter-spacing:-0.01em;margin-bottom:0.2rem;}
+.person-nim{font-size:0.77rem;color:var(--muted);margin-bottom:0.9rem;}
+.person-bio{font-size:0.85rem;color:var(--ink2);line-height:1.75;}
+
+/* Komisi blocks */
+.komisi-section{margin-bottom:0;}
+.komisi-label-row{
+  display:flex;align-items:center;gap:1rem;
+  padding:1.5rem 0;
+  border-top:1px solid var(--line);
+}
+.k-num{
+  font-family:'Fraunces',serif;
+  font-size:3rem;font-weight:300;
+  color:var(--line);
+  line-height:1;flex-shrink:0;
+  width:56px;text-align:right;
+}
+.k-info{}
+.k-name{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:600;color:var(--ink);letter-spacing:-0.01em;}
+.k-sub{font-size:0.72rem;color:var(--muted);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.1rem;}
+
+.members-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  margin-bottom:2rem;
+}
+.member-card{
+  display:flex;align-items:center;gap:1rem;
+  padding:1.1rem 1.3rem;
+  background:var(--surface);
+  transition:background 0.2s;
+}
+.member-card:hover{background:var(--bg);}
+.mc-info .person-name{font-size:0.9rem;margin-bottom:0.05rem;}
+.mc-info .person-nim{margin-bottom:0;font-size:0.72rem;}
+.mc-info .person-role{margin-bottom:0.1rem;font-size:0.62rem;}
+
+/* ─── FUNGSI KOMISI ─── */
+#komisi{background:var(--bg);}
+
+.fungsi-wrap{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);
+  border-radius:20px;overflow:hidden;
+}
+.fungsi-card{
+  background:var(--surface);
+  padding:2.2rem;
+  position:relative;overflow:hidden;
+  transition:background 0.25s;
+}
+.fungsi-card:hover{background:var(--bg);}
+.fc-komisi{
+  display:inline-block;
+  font-size:0.62rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  background:var(--tag-bg);color:var(--tag-ink);
+  padding:0.2rem 0.6rem;border-radius:99px;
+  margin-bottom:1.2rem;
+}
+.fc-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;
+  margin-bottom:1.2rem;
+  transition:transform 0.25s;
+}
+.fungsi-card:hover .fc-icon{transform:scale(1.1) rotate(-5deg);}
+.fc-title{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:var(--ink);margin-bottom:0.6rem;letter-spacing:-0.01em;}
+.fc-desc{font-size:0.82rem;color:var(--muted);line-height:1.75;}
+
+
+
+/* ─── KPU ─── */
+#kpu{background:var(--bag);}
+#kpu .s-eyebrow{color:#ffcfcc;}
+#kpu .s-eyebrow::before{background:#ffcfcc;}
+#kpu .s-title{color:#fff;}
+#kpu .s-title em{color:rgba(255,255,255,0.4);}
+#kpu .s-desc{color:rgba(255,255,255,0.5);}
+
+.kpu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+
+.kpu-text h3{
+  font-family:'Fraunces',serif;
+  font-size:1rem;font-weight:600;
+  color:#ffcfcc;
+  margin-bottom:0.4rem;margin-top:1.8rem;
+}
+.kpu-text h3:first-child{margin-top:0;}
+.kpu-text p{font-size:0.87rem;color:rgba(255,255,255,0.55);line-height:1.8;}
+
+.kpu-cards{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;}
+.kpu-stat{
+  background:rgba(255,255,255,0.05);
+  padding:1.6rem 2rem;
+  display:flex;align-items:center;gap:1.5rem;
+  transition:background 0.2s;
+}
+.kpu-stat:hover{background:rgba(255,255,255,0.1);}
+.kpu-stat-val{
+  font-family:'Fraunces',serif;
+  font-size:2.2rem;font-weight:300;
+  color:#ffcfcc;line-height:1;flex-shrink:0;
+  width:72px;text-align:right;
+}
+.kpu-stat-label{font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.5;}
+
+/* ─── MUSANG ─── */
+#musang{background:var(--surface);}
+
+.musang-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2.4rem;
+  align-items: start;
+}
+.musang-intro-text {}
+.musang-intro-text p { font-size:0.87rem;color:var(--muted);line-height:1.8; }
+
+/* 4-pillar grid */
+.musang-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+.musang-pillar {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+.musang-pillar:hover {
+  background: var(--blue-lt);
+  border-color: rgba(196,30,14,0.2);
+}
+.musang-pillar-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: var(--blue-lt);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.musang-pillar-icon svg { width: 14px; height: 14px; }
+.musang-pillar-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.18rem;
+}
+.musang-pillar-desc {
+  font-size: 0.65rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* main content area */
+.musang-content { margin-top: 0; }
+.musang-content .musang-right h3:first-child { margin-top: 0; }
+
+/* Tujuan list: elegant numbered rows */
+.musang-right ul.tujuan-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  border: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  background: none !important;
+  counter-reset: tujuan;
+}
+.musang-right ul.tujuan-grid li {
+  counter-increment: tujuan;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.9rem !important;
+  background: var(--bg) !important;
+  border: 1px solid var(--line) !important;
+  border-left: 3px solid var(--blue) !important;
+  border-radius: 10px !important;
+  padding: 0.7rem 1rem !important;
+  font-size: 0.82rem !important;
+  color: var(--ink2) !important;
+  line-height: 1.55 !important;
+  transition: background 0.18s, border-color 0.18s, transform 0.18s !important;
+}
+.musang-right ul.tujuan-grid li:hover {
+  background: var(--blue-lt) !important;
+  border-color: rgba(196,30,14,0.25) !important;
+  transform: translateX(3px) !important;
+}
+.musang-right ul.tujuan-grid li::before {
+  content: counter(tujuan, decimal-leading-zero) !important;
+  font-size: 0.62rem !important;
+  font-weight: 800 !important;
+  color: var(--blue) !important;
+  background: var(--blue-lt) !important;
+  min-width: 26px !important;
+  height: 26px !important;
+  border-radius: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  margin-top: 0.1em !important;
+  letter-spacing: 0.02em !important;
+  border: none !important;
+  width: 26px !important;
+  margin-top: 0 !important;
+}
+
+.musang-right{}
+.musang-right h3{
+  font-family:'Fraunces',serif;
+  font-size:1rem;font-weight:600;
+  color:var(--bag);
+  margin-bottom:0.4rem;margin-top:1.8rem;
+}
+.musang-right h3:first-child{margin-top:0;}
+.musang-right p{font-size:0.87rem;color:var(--muted);line-height:1.8;}
+
+.musang-right ul{
+  list-style:none;
+  padding:0;
+  margin:0.6rem 0 0;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+}
+.musang-right ul li{
+  font-size:0.84rem;
+  color:var(--ink2);
+  line-height:1.6;
+  padding:0.75rem 1.1rem 0.75rem 1rem;
+  background:var(--bg);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:flex-start;
+  gap:0.75rem;
+  transition:background 0.18s;
+}
+.musang-right ul li:last-child{border-bottom:none;}
+.musang-right ul li:hover{background:var(--bg2);}
+.musang-right ul li::before{
+  content:'';
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--blue);
+  flex-shrink:0;
+  margin-top:0.42rem;
+}
+ 
+.musang-agenda-block {
+  margin-top: 2.2rem;
+}
+.musang-agenda-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--bag);
+  margin-bottom: 1rem;
+}
+
+/* ─── MUSANG AGENDA — VERTICAL STEPPER ─── */
+.pleno-stepper {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pleno-step {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 0 1rem;
+  cursor: pointer;
+}
+
+/* left spine: number + line */
+.pleno-step-spine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.pleno-step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  position: relative;
+  z-index: 2;
+}
+.pleno-step-line {
+  width: 2px;
+  flex: 1;
+  min-height: 16px;
+  background: var(--line);
+  transition: background 0.2s;
+}
+.pleno-step:last-child .pleno-step-line {
+  display: none;
+}
+
+/* right content */
+.pleno-step-body {
+  padding-bottom: 1.4rem;
+}
+.pleno-step:last-child .pleno-step-body {
+  padding-bottom: 0;
+}
+
+/* header row — always visible */
+.pleno-step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  transition: background 0.18s;
+  margin-top: 0.18rem; /* align with dot center */
+  gap: 0.6rem;
+}
+.pleno-step:hover .pleno-step-header,
+.pleno-step.open .pleno-step-header {
+  background: var(--bg2);
+}
+.pleno-step-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.pleno-step-sub {
+  font-size: 0.65rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: 0.1rem;
+}
+.pleno-step-chevron {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  transition: transform 0.25s ease, color 0.2s;
+}
+.pleno-step.open .pleno-step-chevron {
+  transform: rotate(180deg);
+  color: var(--blue);
+}
+
+/* detail panel — collapsible */
+.pleno-step-detail {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease;
+  opacity: 0;
+}
+.pleno-step.open .pleno-step-detail {
+  max-height: 1000px;
+  opacity: 1;
+}
+.pleno-step-detail-inner {
+  margin: 0.5rem 0.8rem 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+}
+
+/* numbered list inside detail */
+.pleno-list {
+  margin: 0; padding: 0;
+  list-style: none;
+}
+.pleno-list li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  font-size: 0.72rem;
+  color: var(--ink2);
+  line-height: 1.6;
+  padding: 0.38rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.pleno-list li:last-child { border-bottom: none; }
+.pleno-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  margin-top: 0.48em;
+  box-shadow: 0 0 0 2px var(--blue-lt);
+}
+
+/* active state — dot fills */
+.pleno-step.open .pleno-step-num,
+.pleno-step:hover .pleno-step-num {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+.pleno-step.open .pleno-step-line {
+  background: linear-gradient(to bottom, var(--blue), var(--line));
+}
+
+/* ─── PESERTA MUSANG ─── */
+.peserta-section {
+  margin-top: 2.4rem;
+}
+.peserta-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+.peserta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.peserta-card {
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.peserta-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+.peserta-card-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.peserta-card-icon.penuh  { background: var(--blue-lt); }
+.peserta-card-icon.peninjau { background: var(--bag-lt); }
+.peserta-card-icon svg { width: 14px; height: 14px; }
+.peserta-card-type {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.peserta-card-type.penuh  { color: var(--blue); }
+.peserta-card-type.peninjau { color: var(--bag); }
+.peserta-card-body {
+  padding: 0.6rem 0.9rem 0.75rem;
+  background: var(--surface);
+}
+.peserta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.69rem;
+  color: var(--ink2);
+  line-height: 1.55;
+  padding: 0.28rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.peserta-item:last-child { border-bottom: none; }
+.peserta-item-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.45em;
+}
+.penuh  .peserta-item-dot { background: var(--blue); box-shadow: 0 0 0 2px var(--blue-lt); }
+.peninjau .peserta-item-dot { background: var(--bag);  box-shadow: 0 0 0 2px var(--bag-lt);  }
+
+/* ─── MUSYAWARAH LUAR BIASA ─── */
+.mlb-box {
+  margin-top: 2.4rem;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(196,30,14,0.18);
+  background: linear-gradient(135deg, #fff8f7 0%, #fdf3f3 100%);
+}
+.mlb-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1.1rem;
+  background: linear-gradient(90deg, var(--blue) 0%, #e63222 100%);
+}
+.mlb-banner-icon {
+  width: 34px; height: 34px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.mlb-banner-icon svg { width: 17px; height: 17px; }
+.mlb-banner-text {}
+.mlb-banner-eyebrow {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  line-height: 1;
+  margin-bottom: 0.18rem;
+}
+.mlb-banner-title {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.mlb-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.mlb-col {
+  padding: 1rem 1.1rem;
+}
+.mlb-col:first-child {
+  border-right: 1px solid rgba(196,30,14,0.12);
+}
+.mlb-col-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.7rem;
+}
+.mlb-col-label::before {
+  content: '';
+  width: 12px; height: 2px;
+  background: var(--blue);
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+.mlb-fact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.mlb-fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.69rem;
+  color: var(--ink2);
+  line-height: 1.55;
+}
+.mlb-fact-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 2.5px var(--blue-lt);
+  flex-shrink: 0;
+  margin-top: 0.46em;
+}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--bag);
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding:2.5rem 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.foot-logo{font-family:'Fraunces',serif;font-size:1rem;font-weight:600;color:#fff;}
+.foot-copy{font-size:0.75rem;color:rgba(255,255,255,0.5);}
+
+/* ─── SOCIAL BUTTONS ─── */
+.social-btns{display:flex;gap:0.5rem;align-items:center;}
+.soc-btn{
+  display:inline-flex;align-items:center;gap:0.45rem;
+  padding:0.42rem 0.9rem;
+  border-radius:99px;
+  font-size:0.75rem;font-weight:600;
+  text-decoration:none;
+  border:1px solid transparent;
+  transition:all 0.2s;
+  white-space:nowrap;
+}
+.soc-btn svg{width:14px;height:14px;flex-shrink:0;}
+.soc-btn.ig{
+  background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
+  color:#fff;border-color:transparent;
+}
+.soc-btn.ig:hover{opacity:0.88;transform:translateY(-1px);}
+.soc-btn.gm{
+  background:#fff;color:#444;
+  border-color:var(--line);
+}
+.soc-btn.gm:hover{background:var(--bg2);transform:translateY(-1px);}
+
+/* ─── ASPIRASI FLOAT BUTTON ─── */
+.aspirasi-fab{
+  position:fixed;bottom:2rem;right:2rem;z-index:300;
+  display:inline-flex;align-items:center;gap:0.55rem;
+  padding:0.85rem 1.5rem;
+  background:var(--blue);
+  color:#fff;
+  border-radius:99px;
+  font-size:0.82rem;font-weight:700;
+  text-decoration:none;
+  box-shadow:0 8px 28px rgba(196,30,14,0.4);
+  transition:all 0.2s;
+  letter-spacing:0.02em;
+  animation:fabPop 0.5s 1s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+.aspirasi-fab:hover{background:var(--blue-dk);transform:translateY(-2px);box-shadow:0 14px 36px rgba(196,30,14,0.5);}
+.aspirasi-fab svg{width:16px;height:16px;}
+@keyframes fabPop{from{opacity:0;transform:scale(0.7) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.on{opacity:1;transform:none;}
+
+/* ─── RESPONSIVE ─── */
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — TABLET  (≤ 900px)
+   ═══════════════════════════════════════════════ */
+@media(max-width:900px){
+
+  /* ── Nav ── */
+  nav{
+    grid-template-columns:1fr;
+    height:auto;
+    padding:0.75rem 5%;
+    display:flex;
+    flex-direction:column;
+    gap:0.5rem;
+  }
+  .nav-links{ flex-wrap:wrap; justify-content:center; }
+  .nav-pill{ text-align:center; }
+
+  /* ── Hero ── */
+  .hero-h1-row{ flex-direction:column; align-items:flex-start; gap:1.5rem; }
+  .hero-side-logo{ height:clamp(80px,18vw,160px); }
+
+  /* ── Profil / Kade ── */
+  .kade-wrap{ grid-template-columns:1fr; }
+
+  /* ── Fungsi komisi ── */
+  .fungsi-wrap{ grid-template-columns:1fr 1fr; }
+
+  /* ── KPU ── */
+  .kpu-grid{ grid-template-columns:1fr; }
+
+  /* ── Musang ── */
+  .musang-layout{ grid-template-columns:1fr; }
+  .musang-intro{ grid-template-columns:1fr; }
+  .musang-pillars{ grid-template-columns:1fr 1fr; }
+
+  /* ── Peserta grid ── */
+  .peserta-grid{ grid-template-columns:1fr; }
+
+  /* ── MLB body ── */
+  .mlb-body{ grid-template-columns:1fr; }
+  .mlb-col:first-child{ border-right:none; border-bottom:1px solid var(--line); padding-bottom:1.5rem; }
+
+  /* ── Kalender topbar ── */
+  .kalender-topbar{ flex-direction:column; align-items:flex-start; gap:0.75rem; }
+  .kalender-open-btn{ align-self:flex-start; }
+
+  /* ── Footer ── */
+  footer{ flex-direction:column; text-align:center; }
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — MOBILE  (≤ 600px)
+   ═══════════════════════════════════════════════ */
+@media(max-width:600px){
+
+  /* ── Section spacing ── */
+  .section{ padding:70px 5%; }
+
+  /* ── Nav ── */
+  .nav-links a{ font-size:0.72rem; padding:0.35rem 0.7rem; }
+
+  /* ── Hero ── */
+  .hero{ padding:0 5% 6vh; }
+  .hero-side-logo{ display:none; }           /* hide logo on tiny screens */
+  .hero-chips{ gap:0.4rem; }
+  .chip{ font-size:0.72rem; padding:0.4rem 0.85rem; }
+
+  /* ── Fungsi komisi → single col ── */
+  .fungsi-wrap{ grid-template-columns:1fr; }
+  .fungsi-card{ padding:1.6rem; }
+
+  /* ── Komisi tabs → stack buttons ── */
+  .komisi-tab-btns{ grid-template-columns:1fr !important; }
+  .komisi-tabs-wrap{ max-width:100% !important; }
+
+  /* ── Profil kade ── */
+  .kade-wrap{ padding:1.5rem; gap:1.5rem; }
+  .members-grid{ grid-template-columns:1fr; }
+
+  /* ── KPU stat ── */
+  .kpu-stat{ padding:1.2rem 1.4rem; gap:1rem; }
+  .kpu-stat-val{ font-size:1.8rem; width:56px; }
+
+  /* ── Musang pillars → single col ── */
+  .musang-pillars{ grid-template-columns:1fr; }
+
+  /* ── Pleno stepper ── */
+  .pleno-step{ grid-template-columns:32px 1fr; gap:0; }
+  .pleno-step-num{ width:28px; height:28px; font-size:0.65rem; }
+  .pleno-step-line{ left:13px; }
+
+  /* ── Book shelf ── */
+  .book-shelf{ gap:2rem; padding:1.2rem 0 2rem; }
+  .book-wrap{ width:130px; }
+  .book-3d{ width:130px; height:192px; }
+
+  /* ── Kalender ── */
+  .kalender-iframe-box{ padding-bottom:80%; min-height:320px; }
+  .kalender-topbar{ padding:1rem 1.2rem; }
+  .kalender-topbar-title{ font-size:0.85rem; }
+
+  /* ── Contact grid → full width cards ── */
+  .contact-grid{ grid-template-columns:1fr; max-width:100%; }
+  .contact-card{ padding:1.2rem 1.4rem; }
+
+  /* ── Aspirasi FAB ── */
+  .aspirasi-fab{ bottom:1.2rem; right:1.2rem; font-size:0.75rem; padding:0.65rem 1.1rem; }
+
+  /* ── Section titles ── */
+  .s-header{ margin-bottom:2.5rem; }
+
+  /* ── MLB box ── */
+  .mlb-banner{ flex-direction:column; align-items:flex-start; gap:0.6rem; }
+
+  /* ── Peserta label row ── */
+  .peserta-label{ flex-direction:column; align-items:flex-start; gap:0.5rem; }
+}
+
+    /* ── KOMISI TABS ── */
+    .komisi-tabs-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .komisi-tab-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.6rem;
+      margin-bottom: 1.4rem;
+    }
+    .komisi-tab-btn {
+      background: var(--bg);
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .komisi-tab-btn:hover {
+      background: var(--blue-lt);
+      border-color: rgba(196,30,14,0.2);
+    }
+    .komisi-tab-btn.active {
+      background: var(--blue-lt);
+      border-color: var(--blue);
+      box-shadow: 0 4px 14px rgba(196,30,14,0.1);
+    }
+    .ktb-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem;
+      line-height: 1;
+      text-align: center;
+      padding-top: 1px; /* fix emoji vertical drift across browsers */
+      flex-shrink: 0;
+      border: 1px solid var(--line);
+      transition: background 0.18s, border-color 0.18s;
+    }
+    .komisi-tab-btn.active .ktb-icon {
+      background: var(--blue-lt);
+      border-color: rgba(196,30,14,0.3);
+    }
+    .ktb-label { line-height: 1.3; }
+    .ktb-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .komisi-tab-btn.active .ktb-num { color: var(--blue); }
+    .ktb-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* panel */
+    .komisi-tab-panel { display: none; }
+    .komisi-tab-panel.active { display: block; }
+
+    .komisi-panel-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 1.2rem;
+      background: var(--blue);
+      border-radius: 12px 12px 0 0;
+    }
+    .komisi-panel-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+    .komisi-panel-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .komisi-panel-sub {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+      margin-top: 0.1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .komisi-task-list {
+      border: 1.5px solid rgba(196,30,14,0.15);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .komisi-task-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.7rem 1.2rem;
+      border-bottom: 1px solid var(--line);
+      transition: background 0.15s;
+      counter-increment: task;
+    }
+    .komisi-task-item:last-child { border-bottom: none; }
+    .komisi-task-item:hover { background: var(--blue-lt); }
+    .komisi-task-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 800;
+      color: var(--blue);
+      background: var(--blue-lt);
+      width: 24px; height: 24px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0.02em;
+    }
+    .komisi-task-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--ink2);
+      line-height: 1.55;
+    }
+
+
+
+.aspirasi-btn{
+  display:inline-flex;align-items:center;gap:0.65rem;
+  padding:1rem 2.4rem;border-radius:99px;
+  background:var(--blue);color:#fff;
+  font-size:0.9rem;font-weight:700;
+  text-decoration:none;letter-spacing:0.02em;
+  box-shadow:0 8px 28px rgba(196,30,14,0.35);
+  transition:all 0.2s;
+}
+.aspirasi-btn:hover{
+  background:var(--blue-dk);
+  box-shadow:0 12px 36px rgba(196,30,14,0.45);
+  transform:translateY(-2px);
+}
+
+/* ─── KALENDER KEGIATAN ─── */
+#kalender{ background:var(--surface); }
+ 
+.kalender-wrap{
+  margin-top:2.5rem;
+  border-radius:20px;
+  overflow:hidden;
+  border:1.5px solid var(--line);
+  box-shadow:0 8px 40px rgba(0,0,0,0.06);
+  position:relative;
+  background:var(--surface);
+}
+ 
+.kalender-topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:1rem;
+  padding:1.2rem 1.8rem;
+  background:var(--bg);
+  border-bottom:1.5px solid var(--line);
+}
+.kalender-topbar-left{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+}
+.kalender-icon{
+  width:36px;height:36px;
+  border-radius:10px;
+  background:var(--blue-lt);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.kalender-topbar-title{
+  font-family:'Fraunces',serif;
+  font-size:1rem;font-weight:600;
+  color:var(--ink);
+}
+.kalender-topbar-sub{
+  font-size:0.72rem;color:var(--muted);
+  margin-top:0.1rem;
+}
+.kalender-open-btn{
+  display:inline-flex;
+  align-items:center;gap:0.45rem;
+  padding:0.45rem 1rem;
+  border-radius:99px;
+  background:var(--bag);
+  color:#fff;
+  font-size:0.75rem;font-weight:600;
+  text-decoration:none;
+  transition:background 0.2s;
+  white-space:nowrap;
+}
+.kalender-open-btn:hover{background:var(--bag-dk);}
+.kalender-open-btn svg{width:12px;height:12px;}
+ 
+.kalender-iframe-box{
+  position:relative;
+  width:100%;
+  padding-bottom:58%;
+  min-height:420px;
+  background:var(--bg);
+}
+.kalender-iframe-box iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:none;
+  display:block;
+}
+ 
+.kalender-placeholder{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1.2rem;
+  padding:2rem;
+  text-align:center;
+  background:var(--bg);
+}
+.kalender-placeholder-icon{
+  width:64px;height:64px;
+  border-radius:18px;
+  background:var(--blue-lt);
+  display:flex;align-items:center;justify-content:center;
+}
+.kalender-placeholder h3{
+  font-family:'Fraunces',serif;
+  font-size:1.2rem;font-weight:600;
+  color:var(--ink);
+}
+.kalender-placeholder p{
+  font-size:0.85rem;color:var(--muted);
+  max-width:420px;line-height:1.7;
+}
+.kalender-setup-steps{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:0.5rem;
+}
+.kalender-step{
+  display:flex;
+  align-items:flex-start;
+  gap:0.6rem;
+  text-align:left;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:0.9rem 1.1rem;
+  max-width:200px;
+}
+.ks-num{
+  font-family:'Fraunces',serif;
+  font-size:1.3rem;font-weight:300;
+  color:var(--blue);line-height:1;flex-shrink:0;
+}
+.ks-text{font-size:0.75rem;color:var(--ink2);line-height:1.5;padding-top:0.1rem;}
+ 
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.25rem;
+  max-width:680px;
+  margin:0 auto;
+}
+.contact-card{
+  display:flex;
+  align-items:center;
+  gap:1.25rem;
+  padding:1.6rem 1.8rem;
+  border-radius:18px;
+  background:var(--surface);
+  border:1.5px solid var(--line);
+  text-decoration:none;
+  color:var(--ink);
+  transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.contact-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 36px rgba(0,0,0,0.08);
+  border-color:var(--blue);
+}
+.contact-icon-wrap{
+  width:60px;height:60px;
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.contact-platform{
+  font-size:0.72rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:var(--muted);
+  margin-bottom:0.2rem;
+}
+.contact-handle{
+  font-size:1rem;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:0.3rem;
+}
+.contact-cta{
+  font-size:0.78rem;
+  color:var(--blue);
+  font-weight:600;
+}
+
+
+/* ─── DOKUMEN HUKUM — BOOK SHELF ─── */
+/* ─── DOKUMEN HUKUM — BOOK SHELF ─── */
+#dokumen{ background:#ffffff; }
+#dokumen .s-eyebrow{ color:var(--blue); }
+#dokumen .s-eyebrow::before{ background:var(--blue); }
+#dokumen .s-title{ color:var(--ink); }
+#dokumen .s-title em{ color:var(--muted); }
+ 
+.book-shelf{
+  display:flex;
+  gap:3.5rem;
+  justify-content:center;
+  flex-wrap:wrap;
+  padding:2rem 0 3rem;
+  perspective:1600px;
+}
+ 
+/* ── OPEN HINT ── */
+.open-hint{
+  text-align:center;
+  font-size:0.7rem;
+  color:var(--muted);
+  margin-bottom:2.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.6rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+.open-hint svg{ width:14px;height:14px;stroke:var(--muted); }
+ 
+/* ── BOOK WRAPPER ── */
+.book-wrap{
+  position:relative;
+  width:168px;
+  cursor:pointer;
+  perspective:1200px;
+  user-select:none;
+}
+ 
+/* ── 3D BOOK BODY ── */
+.book-3d{
+  position:relative;
+  width:168px;
+  height:248px;
+  transform-style:preserve-3d;
+  transform:rotateY(-18deg) rotateX(3deg);
+  transition:transform 0.65s cubic-bezier(0.34,1.3,0.64,1);
+  will-change:transform;
+}
+ 
+/* Hover: tilt & lift */
+.book-wrap:hover .book-3d{
+  transform:rotateY(-28deg) rotateX(4deg) translateY(-18px) scale(1.03);
+}
+/* Press feedback when clicking */
+.book-wrap:active .book-3d{
+  transform:rotateY(-28deg) rotateX(4deg) translateY(-8px) scale(0.98);
+  transition-duration:0.08s;
+}
+ 
+/* ── FRONT COVER ── */
+.book-front{
+  position:absolute;
+  inset:0;
+  border-radius:3px 6px 6px 3px;
+  overflow:hidden;
+  backface-visibility:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:0;
+  background-color:#1a1a1a;
+  /* fine linen weave — shared base */
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 4px);
+  box-shadow:
+    inset 5px 0 12px rgba(0,0,0,0.5),
+    inset -1px 0 2px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.3);
+}
+ 
+/* ── Outer gold rule frame ── */
+.book-front::before{
+  content:'';
+  position:absolute;
+  inset:10px;
+  border:1px solid rgba(201,169,110,0.35);
+  border-radius:1px;
+  z-index:2;
+  pointer-events:none;
+}
+ 
+/* ── Inner gold rule frame ── */
+.book-front::after{
+  content:'';
+  position:absolute;
+  inset:14px;
+  border:1px solid rgba(201,169,110,0.14);
+  border-radius:1px;
+  z-index:2;
+  pointer-events:none;
+}
+ 
+/* ── Ghost watermark badge ── */
+.book-badge{
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Fraunces',serif;
+  font-size:4.8rem;
+  font-weight:600;
+  font-style:italic;
+  line-height:1;
+  letter-spacing:-0.04em;
+  color:rgba(255,255,255,0.04);
+  pointer-events:none;
+  z-index:1;
+  white-space:nowrap;
+}
+ 
+/* ── Top area ── */
+.book-front-top{
+  position:relative;
+  z-index:3;
+  padding:1.1rem 1rem 0;
+  display:flex;
+  flex-direction:column;
+  gap:0.3rem;
+}
+.book-front-top::after{
+  content:'';
+  display:block;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(201,169,110,0.45), transparent);
+  margin-top:0.5rem;
+}
+.book-code{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.52rem;
+  font-weight:800;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:rgba(201,169,110,0.75);
+  display:block;
+}
+.book-year{
+  font-size:0.5rem;
+  font-weight:500;
+  color:rgba(255,255,255,0.18);
+  letter-spacing:0.1em;
+}
+ 
+/* ── Bottom text area ── */
+.book-front-bottom{
+  position:relative;
+  z-index:3;
+  padding:0.85rem 1rem 1rem;
+  margin-top:auto;
+}
+.book-front-bottom::before{
+  content:'';
+  display:block;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(201,169,110,0.45), transparent);
+  margin-bottom:0.65rem;
+}
+.book-front-title{
+  font-family:'Fraunces',serif;
+  font-size:0.78rem;
+  font-weight:600;
+  line-height:1.35;
+  color:rgba(255,255,255,0.88);
+  letter-spacing:0.01em;
+}
+.book-front-sub{
+  font-size:0.54rem;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  margin-top:0.4rem;
+  opacity:0.55;
+}
+ 
+/* ── SPINE ── */
+.book-spine{
+  position:absolute;
+  left:-20px; top:0; bottom:0;
+  width:20px;
+  border-radius:3px 0 0 3px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:rotateY(-90deg) translateX(-10px);
+  transform-origin:right center;
+  background:#141210;
+  box-shadow:inset -2px 0 4px rgba(0,0,0,0.5);
+}
+.book-spine-text{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-family:'Fraunces',serif;
+  font-size:0.48rem;
+  font-weight:600;
+  letter-spacing:0.12em;
+  color:rgba(201,169,110,0.55);
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+ 
+/* ── PAGE STACK (right + top edges) ── */
+.book-pages{
+  position:absolute;
+  right:-10px; top:3px; bottom:3px;
+  width:12px;
+  border-radius:0 3px 3px 0;
+  overflow:hidden;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      #f0ece4 0px, #f0ece4 1.5px,
+      #e0d8cc 1.5px, #e0d8cc 2px,
+      #ece8e0 2px, #ece8e0 3px
+    );
+  box-shadow:
+    2px 0 6px rgba(0,0,0,0.3),
+    inset 0 0 4px rgba(0,0,0,0.1);
+  transform:translateZ(1px);
+}
+ 
+/* ── BACK FACE — parchment interior ── */
+.book-back{
+  position:absolute;
+  inset:0;
+  border-radius:6px 3px 3px 6px;
+  backface-visibility:hidden;
+  transform:rotateY(180deg);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  background:#f5f0e4;
+  /* subtle paper texture */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.018) 0px,
+      rgba(0,0,0,0.018) 1px,
+      transparent 1px,
+      transparent 22px
+    );
+  box-shadow:
+    inset -4px 0 8px rgba(0,0,0,0.08),
+    inset 1px 0 2px rgba(0,0,0,0.05);
+}
+ 
+/* Header strip on back */
+.book-back-title{
+  font-family:'Fraunces',serif;
+  font-size:0.72rem;
+  font-weight:700;
+  color:#f5f0e4;
+  padding:0.7rem 1rem 0.6rem;
+  letter-spacing:0.04em;
+  position:relative;
+  flex-shrink:0;
+}
+/* small left accent line */
+.book-back-title::before{
+  content:'';
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width:3px;
+}
+ 
+.book-back-items{
+  flex:1;
+  padding:0.6rem 0.85rem 0.8rem;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+.book-back-item{
+  font-size:0.6rem;
+  color:#3a3028;
+  line-height:1.55;
+  padding:0.32rem 0;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  display:flex;
+  gap:0.5rem;
+  align-items:flex-start;
+}
+.book-back-item:last-child{ border-bottom:none; }
+.book-back-item::before{
+  content:'';
+  width:4px; height:4px;
+  border-radius:50%;
+  background:currentColor;
+  opacity:0.4;
+  flex-shrink:0;
+  margin-top:0.45em;
+}
+ 
+/* ── SHADOW ── */
+.book-shadow{
+  width:130px;
+  height:16px;
+  background:radial-gradient(ellipse,rgba(0,0,0,0.55) 0%,transparent 70%);
+  margin:0.5rem auto 0;
+  border-radius:50%;
+  opacity:0.4;
+  transform:scaleX(0.65) translateY(0);
+  transition:all 0.6s cubic-bezier(0.34,1.3,0.64,1);
+}
+.book-wrap:hover .book-shadow{
+  opacity:0.65;
+  transform:scaleX(0.9) translateY(8px) scaleY(0.7);
+}
+.book-wrap.open .book-shadow{
+  opacity:0.35;
+  transform:scaleX(1.0) translateY(6px) scaleY(0.6);
+}
+ 
+/* ── LABEL BELOW ── */
+.book-label{
+  text-align:center;
+  margin-top:1rem;
+  opacity:0;
+  transform:translateY(5px);
+  transition:opacity 0.25s ease, transform 0.25s ease;
+}
+.book-wrap:hover .book-label,
+.book-wrap.open .book-label{
+  opacity:1;
+  transform:translateY(0);
+}
+.book-label-name{
+  font-size:0.7rem;
+  font-weight:700;
+  color:var(--ink);
+  letter-spacing:0.02em;
+}
+.book-label-hint{
+  font-size:0.58rem;
+  color:var(--muted);
+  margin-top:0.2rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+}
+.book-wrap.open .book-label-hint::after{
+  content:' ↩ tutup';
+}
+ 
+/* ══════════════════════════════════════════
+   BOOK COVER PATTERNS — unique per book
+   ══════════════════════════════════════════ */
+ 
+/* ══════════════════════════════════════════
+   PROFESSIONAL COVER THEMES
+   Each book: deep solid cloth + linen weave + gold rules + center vignette glow
+   ══════════════════════════════════════════ */
+ 
+/* ── UU: Deep Burgundy — classic law volume ── */
+.book-pp .book-front{
+  background-color:#1e0a0a;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 4px),
+    radial-gradient(ellipse at 50% 50%, rgba(130,20,10,0.45) 0%, transparent 68%);
+}
+.book-pp .book-front::before { border-color:rgba(210,100,80,0.38); }
+.book-pp .book-front::after  { border-color:rgba(210,100,80,0.15); }
+.book-pp .book-badge         { color:rgba(180,40,20,0.08); }
+.book-pp .book-code          { color:rgba(225,165,145,0.85); }
+.book-pp .book-front-sub     { color:rgba(225,165,145,0.85); }
+.book-pp .book-front-top::after,
+.book-pp .book-front-bottom::before { background:linear-gradient(90deg, transparent, rgba(210,100,80,0.5), transparent); }
+.book-pp .book-spine         { background:#130606; }
+.book-pp .book-spine-text    { color:rgba(225,165,145,0.6); }
+.book-pp .book-back-title    { background:linear-gradient(135deg,#8a1208,#5a0c06); }
+.book-pp .book-back-title::before { background:#400806; }
+.book-pp .book-back-item     { color:#201010; }
+.book-pp .book-back-item::before { background:#8a1208; }
+ 
+/* ── GBHK: Presidential Navy — official government blue ── */
+.book-gbhk-pjg .book-front{
+  background-color:#08101e;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 4px),
+    radial-gradient(ellipse at 50% 50%, rgba(27,63,114,0.6) 0%, transparent 68%);
+}
+.book-gbhk-pjg .book-front::before { border-color:rgba(80,130,210,0.38); }
+.book-gbhk-pjg .book-front::after  { border-color:rgba(80,130,210,0.15); }
+.book-gbhk-pjg .book-badge         { color:rgba(27,63,114,0.12); }
+.book-gbhk-pjg .book-code          { color:rgba(165,200,245,0.82); }
+.book-gbhk-pjg .book-front-sub     { color:rgba(165,200,245,0.82); }
+.book-gbhk-pjg .book-front-top::after,
+.book-gbhk-pjg .book-front-bottom::before { background:linear-gradient(90deg, transparent, rgba(80,130,210,0.5), transparent); }
+.book-gbhk-pjg .book-spine         { background:#050912; }
+.book-gbhk-pjg .book-spine-text    { color:rgba(165,200,245,0.6); }
+.book-gbhk-pjg .book-back-title    { background:linear-gradient(135deg,#1b3f72,#0f2548); }
+.book-gbhk-pjg .book-back-title::before { background:#081530; }
+.book-gbhk-pjg .book-back-item     { color:#0c1422; }
+.book-gbhk-pjg .book-back-item::before { background:#1b3f72; }
+ 
+/* ── Kaderisasi: Chancellery Green — institutional forest ── */
+.book-ADART2026 .book-front{
+  background-color:#071009;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 4px),
+    radial-gradient(ellipse at 50% 50%, rgba(30,80,55,0.55) 0%, transparent 68%);
+}
+.book-ADART2026 .book-front::before { border-color:rgba(60,150,100,0.38); }
+.book-ADART2026 .book-front::after  { border-color:rgba(60,150,100,0.15); }
+.book-ADART2026 .book-badge         { color:rgba(45,106,79,0.1); }
+.book-ADART2026 .book-code          { color:rgba(145,205,170,0.82); }
+.book-ADART2026 .book-front-sub     { color:rgba(145,205,170,0.82); }
+.book-ADART2026 .book-front-top::after,
+.book-ADART2026 .book-front-bottom::before { background:linear-gradient(90deg, transparent, rgba(60,150,100,0.5), transparent); }
+.book-ADART2026 .book-spine         { background:#050d07; }
+.book-ADART2026 .book-spine-text    { color:rgba(145,205,170,0.6); }
+.book-ADART2026 .book-back-title    { background:linear-gradient(135deg,#2d6a4f,#1b4332); }
+.book-ADART2026 .book-back-title::before { background:#102a1e; }
+.book-ADART2026 .book-back-item     { color:#0d1e12; }
+.book-ADART2026 .book-back-item::before { background:#2d6a4f; }
+ 
+/* ── Pemilu: Dark Charcoal & Gold — prestige official seal ── */
+.book-pemilu .book-front{
+  background-color:#10100a;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 4px),
+    radial-gradient(ellipse at 50% 50%, rgba(110,82,22,0.5) 0%, transparent 68%);
+}
+.book-pemilu .book-front::before { border-color:rgba(201,169,110,0.5); }
+.book-pemilu .book-front::after  { border-color:rgba(201,169,110,0.22); }
+.book-pemilu .book-badge         { color:rgba(201,169,110,0.09); }
+.book-pemilu .book-code          { color:rgba(215,185,125,0.9); }
+.book-pemilu .book-front-sub     { color:rgba(215,185,125,0.9); }
+.book-pemilu .book-front-top::after,
+.book-pemilu .book-front-bottom::before { background:linear-gradient(90deg, transparent, rgba(201,169,110,0.6), transparent); }
+.book-pemilu .book-spine         { background:#0c0b07; }
+.book-pemilu .book-spine-text    { color:rgba(215,185,125,0.65); }
+.book-pemilu .book-back-title    { background:linear-gradient(135deg,#8a7028,#5a4815); }
+.book-pemilu .book-back-title::before { background:#3a3010; }
+.book-pemilu .book-back-item     { color:#1e1a08; }
+.book-pemilu .book-back-item::before { background:#8a7028; }
+
+/* ── UUKADER: Deep Amethyst / Royal Purple ── */
+.book-UUKADER .book-front {
+  background-color: #0a0710;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 4px),
+    radial-gradient(ellipse at 50% 50%, rgba(82,45,128,0.5) 0%, transparent 68%);
+}
+.book-UUKADER .book-front::before { border-color: rgba(167,139,250,0.5); }
+.book-UUKADER .book-front::after  { border-color: rgba(167,139,250,0.22); }
+.book-UUKADER .book-badge         { color: rgba(167,139,250,0.09); }
+.book-UUKADER .book-code          { color: rgba(196,181,253,0.9); }
+.book-UUKADER .book-front-sub     { color: rgba(196,181,253,0.9); }
+.book-UUKADER .book-front-top::after,
+.book-UUKADER .book-front-bottom::before { background: linear-gradient(90deg, transparent, rgba(167,139,250,0.6), transparent); }
+.book-UUKADER .book-spine         { background: #07050b; }
+.book-UUKADER .book-spine-text    { color: rgba(196,181,253,0.65); }
+.book-UUKADER .book-back-title    { background: linear-gradient(135deg, #6b21a8, #4c1d95); }
+.book-UUKADER .book-back-title::before { background: #3b0764; }
+.book-UUKADER .book-back-item     { color: #170c26; }
+.book-UUKADER .book-back-item::before { background: #6b21a8; }
+
+
+/* ── Musang: Mahogany / Rust Copper ── */
+.book-Musang .book-front {
+  background-color: #120804;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 4px),
+    radial-gradient(ellipse at 50% 50%, rgba(153,56,0,0.5) 0%, transparent 68%);
+}
+.book-Musang .book-front::before { border-color: rgba(234,116,44,0.5); }
+.book-Musang .book-front::after  { border-color: rgba(234,116,44,0.22); }
+.book-Musang .book-badge         { color: rgba(234,116,44,0.09); }
+.book-Musang .book-code          { color: rgba(253,164,104,0.9); }
+.book-Musang .book-front-sub     { color: rgba(253,164,104,0.9); }
+.book-Musang .book-front-top::after,
+.book-Musang .book-front-bottom::before { background: linear-gradient(90deg, transparent, rgba(234,116,44,0.6), transparent); }
+.book-Musang .book-spine         { background: #0d0502; }
+.book-Musang .book-spine-text    { color: rgba(253,164,104,0.65); }
+.book-Musang .book-back-title    { background: linear-gradient(135deg, #b45309, #78350f); }
+.book-Musang .book-back-title::before { background: #451a03; }
+.book-Musang .book-back-item     { color: #291508; }
+.book-Musang .book-back-item::before { background: #b45309; }
+
+
+/* ── LKDewan: Sapphire / Midnight Blue ── */
+.book-LKDewan .book-front {
+  background-color: #050a12;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 4px),
+    radial-gradient(ellipse at 50% 50%, rgba(20,83,154,0.5) 0%, transparent 68%);
+}
+.book-LKDewan .book-front::before { border-color: rgba(96,165,250,0.5); }
+.book-LKDewan .book-front::after  { border-color: rgba(96,165,250,0.22); }
+.book-LKDewan .book-badge         { color: rgba(96,165,250,0.09); }
+.book-LKDewan .book-code          { color: rgba(147,197,253,0.9); }
+.book-LKDewan .book-front-sub     { color: rgba(147,197,253,0.9); }
+.book-LKDewan .book-front-top::after,
+.book-LKDewan .book-front-bottom::before { background: linear-gradient(90deg, transparent, rgba(96,165,250,0.6), transparent); }
+.book-LKDewan .book-spine         { background: #03060d; }
+.book-LKDewan .book-spine-text    { color: rgba(147,197,253,0.65); }
+.book-LKDewan .book-back-title    { background: linear-gradient(135deg, #1d4ed8, #1e3a8a); }
+.book-LKDewan .book-back-title::before { background: #172554; }
+.book-LKDewan .book-back-item     { color: #0a1226; }
+.book-LKDewan .book-back-item::before { background: #1d4ed8; }
+
+/* Open hint */
+.open-hint{
+  text-align:center;
+  font-size:0.7rem;
+  color:var(--muted);
+  margin-top:0.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.4rem;
+}
+.open-hint svg{ width:14px;height:14px;stroke:var(--muted); }
+
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-blob b1"></div>
+  <div class="hero-blob b2"></div>
+  <p class="hero-eyebrow">Dewan HIFI FMIPA Unpad</p>
+  <div class="hero-h1-row">
+    <h1>Dewan<br>Himpunan Mahasiswa Fisika<br><em>FMIPA Unpad</em></h1>
+    <img class="hero-side-logo" src="LogoDewan.png" alt="Logo HIFI FMIPA Unpad"/>
+  </div>
+  <p class="hero-sub">Badan legislatif mahasiswa yang berkomitmen mengemban amanah, menjaga konstitusi, dan memperjuangkan kepentingan seluruh anggota organisasi.</p>
+  <div class="hero-chips">
+    <a href="#profil" class="chip cta">Profil Dewan</a>
+    <a href="#komisi" class="chip bag">Fungsi Komisi</a>
+    <a href="#dokumen" class="chip">Dokumen Hukum</a>
+    <a href="#kpu" class="chip">Tentang KPU</a>
+    <a href="#musang" class="chip">Tentang Musang</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ── PROFIL DEWAN ── -->
+<section class="section" id="profil">
+  <div class="section-inner">
+    <div class="s-header reveal">
+      <div class="s-eyebrow">Profil Dewan</div>
+      <h2 class="s-title">Ketua & <em>Anggota</em> Dewan</h2>
+      <p class="s-desc">Dewan dipimpin oleh Ketua Dewan dan didukung oleh para Ketua serta Anggota Komisi yang berdedikasi dalam menjalankan fungsi legislasi dan pengawasan.</p>
+    </div>
+
+    <!-- KaDe -->
+    <div class="kade-wrap reveal">
+      <div class="ava blue has-photo"><img src="LogoDewan.png" alt="Amjad Faizul Azhim"><span>AM</span></div>
+      <div>
+        <div class="person-role">Ketua Dewan (KaDe)</div>
+        <div class="person-name">Amjad Faizul Azhim </div>
+        <div class="person-nim">NPM 140310240043 · Fisika '24</div>
+        <p class="person-bio">Memimpin seluruh rapat dewan, mengkoordinasikan antar komisi, serta menjadi representasi dewan dalam forum eksternal. Bertanggung jawab penuh atas arah kebijakan dan pengambilan keputusan strategis organisasi.</p>
+      </div>
+    </div>
+
+    <!-- KOMISI I -->
+    <div class="komisi-section reveal">
+      <div class="komisi-label-row">
+        <div class="k-num">I</div>
+        <div class="k-info">
+          <div class="k-sub">Komisi</div>
+          <div class="k-name">Aspirasi & Advokasi</div>
+        </div>
+      </div>
+      <div class="members-grid">
+        <div class="member-card">
+          <div class="ava sm teal has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Ketua Komisi I</div>
+            <div class="person-name">Aghnia Afuza Azca </div>
+            <div class="person-nim">140310240023 · Fisika '24</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm violet has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Aleasandrina Senjaya Putri </div>
+            <div class="person-nim">140310240076 · Fisika '24</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm rose has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Rendy Putra Pratama</div>
+            <div class="person-nim">140310230037 · Fisika '23</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm amber has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Muhammad Rifqi Pratama Hardiansyah</div>
+            <div class="person-nim">140310230058 · Fisika '23</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm blue has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Fahri Fadilah</div>
+            <div class="person-nim">140310250069 · Fisika '25</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm green has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Alfisyahrin Nur Ramadhan</div>
+            <div class="person-nim">140310250076 · Fisika '25</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KOMISI II -->
+    <div class="komisi-section reveal">
+      <div class="komisi-label-row">
+        <div class="k-num">II</div>
+        <div class="k-info">
+          <div class="k-sub">Komisi</div>
+          <div class="k-name">Pengawasan</div>
+        </div>
+      </div>
+      <div class="members-grid">
+        <div class="member-card">
+          <div class="ava sm green has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Ketua Komisi II</div>
+            <div class="person-name">Farel Al Faren</div>
+            <div class="person-nim">140310240065 · Fisika '24</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm blue has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Achmad Syarif Maulana</div>
+            <div class="person-nim">140310240072 · Fisika '24</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm slate has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Farrel Aviyo Rahagi</div>
+            <div class="person-nim">140310230055 · Fisika</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm rose has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Muhamad Tadha Naufal Padhil</div>
+            <div class="person-nim">140310250035 · Fisika '25</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm amber has photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Azmi Naufal Ridwansyah</div>
+            <div class="person-nim">140310250038 · Fisika '25</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm teal has photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Putri Nuurul Qomariyah</div>
+            <div class="person-nim">140310250075 · Fisika '25</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KOMISI III -->
+    <div class="komisi-section reveal">
+      <div class="komisi-label-row">
+        <div class="k-num">III</div>
+        <div class="k-info">
+          <div class="k-sub">Komisi</div>
+          <div class="k-name">Legislasi</div>
+        </div>
+      </div>
+      <div class="members-grid">
+        <div class="member-card">
+          <div class="ava sm rose has has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Ketua Komisi III</div>
+            <div class="person-name">Dhafina Hasna Naila Roesmana</div>
+            <div class="person-nim">140310240017 · Fisika '24</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm amber has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Hafiz Athaariq Pramantya</div>
+            <div class="person-nim">140310240006 · Fisika '24</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm teal has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">David Triamada</div>
+            <div class="person-nim">140310230025 · Fisika '23</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm violet has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Azka Hisyami</div>
+            <div class="person-nim">140310250009 · Fisika '25</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm blue has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Andhi Saputra</div>
+            <div class="person-nim">140310250054 · Fisika '25</div>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="ava sm green has-photo"><img src="LogoDewan.png"></div>
+          <div class="mc-info">
+            <div class="person-role">Anggota</div>
+            <div class="person-name">Indri Sabilatuddiniyah</div>
+            <div class="person-nim">140310250047 · Fisika '47</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FUNGSI & TUGAS KOMISI ── -->
+<section class="section" id="komisi">
+  <div class="section-inner">
+    <div class="s-header reveal">
+      <div class="s-eyebrow">Fungsi & Tugas</div>
+      <h2 class="s-title">Peran Setiap <em>Komisi</em></h2>
+      <p class="s-desc">Tiap komisi menjalankan fungsi legislasi, pengawasan, dan anggaran dalam bidangnya untuk memastikan organisasi berjalan sesuai konstitusi dan kepentingan anggota.</p>
+    </div>
+
+    <div class="komisi-tabs-wrap reveal">
+
+      <!-- Tab buttons -->
+      <div class="komisi-tab-btns">
+        <button class="komisi-tab-btn active" onclick="switchKomisi(0)">
+          <div class="ktb-icon">⚖️</div>
+          <div class="ktb-label">
+            <div class="ktb-num">Komisi I</div>
+            <div class="ktb-name">Aspirasi & Advokasi</div>
+          </div>
+        </button>
+        <button class="komisi-tab-btn" onclick="switchKomisi(1)">
+          <div class="ktb-icon">💰</div>
+          <div class="ktb-label">
+            <div class="ktb-num">Komisi II</div>
+            <div class="ktb-name">Pengawasan</div>
+          </div>
+        </button>
+        <button class="komisi-tab-btn" onclick="switchKomisi(2)">
+          <div class="ktb-icon">📣</div>
+          <div class="ktb-label">
+            <div class="ktb-num">Komisi III</div>
+            <div class="ktb-name">Legislasi</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Panel I -->
+      <div class="komisi-tab-panel active" id="kpanel-0">
+        <div class="komisi-panel-header">
+          <span class="komisi-panel-icon">⚖️</span>
+          <div>
+            <div class="komisi-panel-title">Komisi I — Aspirasi & Advokasi</div>
+            <div class="komisi-panel-sub">6 tugas pokok</div>
+          </div>
+        </div>
+        <div class="komisi-task-list">
+          <div class="komisi-task-item"><span class="komisi-task-num">01</span><span class="komisi-task-text">Menyusun metode penjaringan aspirasi anggota himpunan dan tahapan advokasi</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">02</span><span class="komisi-task-text">Menampung aspirasi anggota himpunan</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">03</span><span class="komisi-task-text">Mengadvokasikan aspirasi anggota himpunan dan melakukan transparansi hasilnya</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">04</span><span class="komisi-task-text">Pelatihan legislatif internal dewan</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">05</span><span class="komisi-task-text">Pengarsipan Dokumen Musang</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">06</span><span class="komisi-task-text">Mengelola Official Account DE HIFI</span></div>
+        </div>
+      </div>
+
+      <!-- Panel II -->
+      <div class="komisi-tab-panel" id="kpanel-1">
+        <div class="komisi-panel-header">
+          <span class="komisi-panel-icon">💰</span>
+          <div>
+            <div class="komisi-panel-title">Komisi II — Pengawasan</div>
+            <div class="komisi-panel-sub">9 tugas pokok</div>
+          </div>
+        </div>
+        <div class="komisi-task-list">
+          <div class="komisi-task-item"><span class="komisi-task-num">01</span><span class="komisi-task-text">Membuat Standar Baku Pengawasan (SBP)</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">02</span><span class="komisi-task-text">Membuat MoU Koordinasi BP-DE</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">03</span><span class="komisi-task-text">Melaksanakan Rapat Kerja Awal Tahun</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">04</span><span class="komisi-task-text">Melaksanakan Sharing Kepengurusan</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">05</span><span class="komisi-task-text">Melaksanakan Rapat Evaluasi</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">06</span><span class="komisi-task-text">Melakukan Survey Kepuasan Pengawasan DE kepada BP</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">07</span><span class="komisi-task-text">Mengelola BAP dan Lembar Penilaian</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">08</span><span class="komisi-task-text">Melakukan evaluasi komunikasi dengan BP terkait SOP Pengawasan</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">09</span><span class="komisi-task-text">Melaksanakan Rapat Kerja Akhir Tahun</span></div>
+        </div>
+      </div>
+
+      <!-- Panel III -->
+      <div class="komisi-tab-panel" id="kpanel-2">
+        <div class="komisi-panel-header">
+          <span class="komisi-panel-icon">📣</span>
+          <div>
+            <div class="komisi-panel-title">Komisi III — Legislasi</div>
+            <div class="komisi-panel-sub">5 tugas pokok</div>
+          </div>
+        </div>
+        <div class="komisi-task-list">
+          <div class="komisi-task-item"><span class="komisi-task-num">01</span><span class="komisi-task-text">Melakukan sosialisasi hasil Musyawarah Anggota 2024 kepada Anggota Himpunan</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">02</span><span class="komisi-task-text">Melakukan Pencerdasan Regulasi kepada Anggota Himpunan</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">03</span><span class="komisi-task-text">Melakukan Pengkajian Regulasi HIFI</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">04</span><span class="komisi-task-text">Membentuk dan mengadakan Pembekalan kepada Panitia Komisi Pemilihan Umum HIFI 2025</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">05</span><span class="komisi-task-text">Membentuk dan mengadakan Pembekalan serta Simulasi Pelaksanaan Musang kepada Panitia Musyawarah Anggota HIFI 2025</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    
+  </div>
+</section>
+
+<!-- ── KPU ── -->
+<section class="section" id="kpu">
+  <div class="section-inner">
+    <div class="s-header reveal">
+      <div class="s-eyebrow">Lembaga Ad Hoc</div>
+      <h2 class="s-title" style="color:#fff;">Komisi <em>Pemilihan</em> Umum</h2>
+      <p class="s-desc">Lembaga independen yang dibentuk Dewan untuk menyelenggarakan pemilihan umum secara jujur, adil, dan transparan.</p>
+    </div>
+
+    <div class="kpu-grid reveal">
+      <div class="kpu-text">
+        <h3>Apa itu KPU?</h3>
+        <p>Komisi Pemilihan Umum (KPU) adalah lembaga ad hoc yang dibentuk oleh Dewan untuk menyelenggarakan proses pemilihan umum dalam lingkup organisasi secara independen dan tidak memihak kandidat manapun.</p>
+        <h3>Wewenang KPU</h3>
+        <p>KPU berwenang menetapkan jadwal dan tata tertib UUKADER, memverifikasi kandidat, memfasilitasi kampanye yang sehat, melaksanakan pemungutan suara, serta mengumumkan hasil penghitungan secara resmi.</p>
+        <h3>Hubungan dengan Dewan</h3>
+        <p>KPU dibentuk berdasarkan keputusan Dewan dan berkewajiban menyampaikan laporan penyelenggaraan pemilihan kepada Dewan setelah seluruh rangkaian kegiatan selesai.</p>
+        <h3>Masa Kerja</h3>
+        <p>Masa kerja KPU terbatas pada periode penyelenggaraan pemilihan — mulai dari tahap persiapan hingga penetapan hasil akhir dan selesainya sengketa (jika ada).</p>
+      </div>
+      <div class="kpu-cards">
+        <div class="kpu-stat">
+          <div class="kpu-stat-val">3</div>
+          <div class="kpu-stat-label">Tahapan utama penyelenggaraan UUKADER — Persiapan, Pelaksanaan, Penetapan</div>
+        </div>
+        <div class="kpu-stat">
+          <div class="kpu-stat-val">5</div>
+          <div class="kpu-stat-label">Anggota KPU yang ditugaskan per periode kepengurusan</div>
+        </div>
+        <div class="kpu-stat">
+          <div class="kpu-stat-val">100%</div>
+          <div class="kpu-stat-label">Independensi — tidak memihak kandidat manapun</div>
+        </div>
+        <div class="kpu-stat">
+          <div class="kpu-stat-val">1×</div>
+          <div class="kpu-stat-label">Penyelenggaraan per periode kepengurusan organisasi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MUSANG ── -->
+<section class="section" id="musang">
+  <div class="section-inner">
+    <div class="s-header reveal">
+      <div class="s-eyebrow">Forum Tertinggi</div>
+      <h2 class="s-title">Musyawarah <em>Anggota</em> (Musang)</h2>
+      <p class="s-desc">Forum pleno tertinggi organisasi yang melibatkan seluruh anggota aktif — perwujudan kedaulatan tertinggi yang dilaksanakan secara demokratis.</p>
+    </div>
+
+    <!-- intro: description left, 4 pillars right -->
+    <div class="musang-intro reveal">
+      <div class="musang-intro-text">
+        <p>Musyawarah Anggota (MUSANG) adalah forum pengambilan keputusan tertinggi dalam HIFI FMIPA Unpad. Melalui MUSANG, seluruh anggota menjalankan kedaulatan organisasi untuk menentukan arah kebijakan, mengevaluasi kinerja lembaga, serta menetapkan keputusan strategis yang mengikat seluruh komponen organisasi.</p>
+      </div>
+      <div class="musang-pillars">
+        <div class="musang-pillar">
+          <div class="musang-pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div>
+            <div class="musang-pillar-title">Forum Tertinggi</div>
+            <div class="musang-pillar-desc">Wadah pengambilan keputusan tertinggi yang melibatkan seluruh anggota aktif.</div>
+          </div>
+        </div>
+        <div class="musang-pillar">
+          <div class="musang-pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <div class="musang-pillar-title">Suara Anggota</div>
+            <div class="musang-pillar-desc">Setiap anggota berhak hadir, berpendapat, dan memberikan suara langsung.</div>
+          </div>
+        </div>
+        <div class="musang-pillar">
+          <div class="musang-pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="musang-pillar-title">Demokratis & Deliberatif</div>
+            <div class="musang-pillar-desc">Keputusan diambil melalui musyawarah mufakat atau pemungutan suara.</div>
+          </div>
+        </div>
+        <div class="musang-pillar">
+          <div class="musang-pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div>
+            <div class="musang-pillar-title">Keputusan Mengikat</div>
+            <div class="musang-pillar-desc">Seluruh hasil keputusan Musang mengikat semua elemen organisasi.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- full-width content -->
+    <div class="musang-content reveal">
+      <div class="musang-right">
+        <h3>Tujuan MUSANG</h3>
+        <ul class="tujuan-grid"> 
+          <li>Menetapkan dan mengangkat presidium sidang</li>
+          <li>Meminta dan mengevaluasi LPJ Badan Pengurus serta laporan kegiatan Dewan HIFI FMIPA Unpad</li>
+          <li>Meninjau dan menetapkan AD/ART HIFI FMIPA Unpad</li>
+          <li>Mengesahkan Ketua Badan Pengurus dan Ketua Dewan HIFI FMIPA Unpad</li>
+          <li>Merencanakan dan menentukan GBHK Badan Pengurus HIFI FMIPA Unpad masa bakti selanjutnya</li>
+          <li>Menetapkan ketetapan yang dianggap perlu, termasuk agenda dan tata tertib musang</li>
+        </ul>
+      
+        <h3 class="musang-agenda-title">Agenda MUSANG</h3>
+
+        <!-- ── VERTICAL STEPPER ── -->
+        <div class="pleno-stepper">
+
+          <!-- PLENO I -->
+          <div class="pleno-step">
+            <div class="pleno-step-spine">
+              <div class="pleno-step-num">I</div>
+              <div class="pleno-step-line"></div>
+            </div>
+            <div class="pleno-step-body">
+              <div class="pleno-step-header">
+                <div>
+                  <div class="pleno-step-title">Sidang Pleno I</div>
+                  <div class="pleno-step-sub">Pembukaan &amp; Pengesahan Presidium</div>
+                </div>
+                <svg class="pleno-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="pleno-step-detail">
+                <div class="pleno-step-detail-inner">
+                  <ul class="pleno-list">
+                    <li>Pembukaan resmi Musyawarah Anggota akhir tahun HIFI FMIPA Unpad</li>
+                    <li>Penetapan &amp; pengesahan Presidium Sidang</li>
+                    <li>Pengesahan tata tertib persidangan</li>
+                    <li>Pengesahan agenda sidang MUSANG</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PLENO II -->
+          <div class="pleno-step">
+            <div class="pleno-step-spine">
+              <div class="pleno-step-num">II</div>
+              <div class="pleno-step-line"></div>
+            </div>
+            <div class="pleno-step-body">
+              <div class="pleno-step-header">
+                <div>
+                  <div class="pleno-step-title">Sidang Pleno II</div>
+                  <div class="pleno-step-sub">LPJ &amp; Pengesahan Kepengurusan</div>
+                </div>
+                <svg class="pleno-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="pleno-step-detail">
+                <div class="pleno-step-detail-inner">
+                  <ul class="pleno-list">
+                    <li>Penyampaian &amp; pembahasan Laporan Pertanggungjawaban (LPJ) Badan Pengurus</li>
+                    <li>Penyampaian dan evaluasi laporan kegiatan Dewan HIFI FMIPA Unpad</li>
+                    <li>Penyampaian tanggapan, kritik, dan rekomendasi dari peserta</li>
+                    <li>Pengambilan keputusan atas LPJ</li>
+                    <li>Mengesahkan Ketua Badan Pengurus dan Ketua Dewan Himpunan Mahasiswa Fisika FMIPA Unpad</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PLENO III -->
+          <div class="pleno-step">
+            <div class="pleno-step-spine">
+              <div class="pleno-step-num">III</div>
+              <div class="pleno-step-line"></div>
+            </div>
+            <div class="pleno-step-body">
+              <div class="pleno-step-header">
+                <div>
+                  <div class="pleno-step-title">Sidang Pleno III</div>
+                  <div class="pleno-step-sub">Konstitusi &amp; GBHK</div>
+                </div>
+                <svg class="pleno-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="pleno-step-detail">
+                <div class="pleno-step-detail-inner">
+                  <ul class="pleno-list">
+                    <li>Pembahasan &amp; pengesahan AD/ART HIFI FMIPA Unpad</li>
+                    <li>Pembahasan Garis-Garis Besar Haluan Kegiatan (GBHK) jangka pendek</li>
+                    <li>Pembahasan GBHK jangka menengah</li>
+                    <li>Rekomendasi strategis organisasi</li>
+                    <li>Pengesahan seluruh ketetapan Musang</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PLENO IV -->
+          <div class="pleno-step">
+            <div class="pleno-step-spine">
+              <div class="pleno-step-num">IV</div>
+              <div class="pleno-step-line"></div>
+            </div>
+            <div class="pleno-step-body">
+              <div class="pleno-step-header">
+                <div>
+                  <div class="pleno-step-title">Sidang Pleno IV</div>
+                  <div class="pleno-step-sub">Pemilihan &amp; Penutupan</div>
+                </div>
+                <svg class="pleno-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="pleno-step-detail">
+                <div class="pleno-step-detail-inner">
+                  <ul class="pleno-list">
+                    <li>Pencalonan &amp; orasi visi-misi Ketua BP HIFI</li>
+                    <li>Pemilihan Ketua Badan Pengurus HIFI FMIPA Unpad</li>
+                    <li>Pencalonan &amp; orasi visi-misi Ketua DE HIFI</li>
+                    <li>Pemilihan Ketua Dewan HIFI FMIPA Unpad</li>
+                    <li>Penutupan resmi MUSANG</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.pleno-stepper -->
+
+        <!-- ── PESERTA MUSANG ── -->
+        <div class="peserta-section">
+          <div class="peserta-label">Peserta Musyawarah Anggota</div>
+          <div class="peserta-grid">
+
+            <!-- Peserta Penuh -->
+            <div class="peserta-card penuh">
+              <div class="peserta-card-head">
+                <div class="peserta-card-icon penuh">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                </div>
+                <span class="peserta-card-type penuh">Peserta Penuh</span>
+              </div>
+              <div class="peserta-card-body">
+                <div class="peserta-item">
+                  <span class="peserta-item-dot"></span>
+                  Anggota DE HIFI FMIPA Unpad
+                </div>
+                <div class="peserta-item">
+                  <span class="peserta-item-dot"></span>
+                  Anggota penuh HIFI FMIPA Unpad dari tiga angkatan termuda
+                </div>
+              </div>
+            </div>
+
+            <!-- Peserta Peninjau -->
+            <div class="peserta-card peninjau">
+              <div class="peserta-card-head">
+                <div class="peserta-card-icon peninjau">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--bag)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </div>
+                <span class="peserta-card-type peninjau">Peserta Peninjau</span>
+              </div>
+              <div class="peserta-card-body">
+                <div class="peserta-item">
+                  <span class="peserta-item-dot"></span>
+                  Anggota penuh HIFI FMIPA Unpad selain yang disebutkan di atas (undangan)
+                </div>
+                <div class="peserta-item">
+                  <span class="peserta-item-dot"></span>
+                  Alumni HIFI FMIPA Unpad
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /.peserta-section -->
+
+        <!-- ── MUSYAWARAH LUAR BIASA ── -->
+        <div class="mlb-box">
+
+          <!-- Banner -->
+          <div class="mlb-banner">
+            <div class="mlb-banner-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <div class="mlb-banner-text">
+              <div class="mlb-banner-eyebrow">Forum Khusus</div>
+              <div class="mlb-banner-title">Musyawarah Luar Biasa</div>
+            </div>
+          </div>
+
+          <!-- Body: two columns -->
+          <div class="mlb-body">
+
+            <!-- Mekanisme -->
+            <div class="mlb-col">
+              <div class="mlb-col-label">Mekanisme</div>
+              <div class="mlb-fact-list">
+                <div class="mlb-fact">
+                  <span class="mlb-fact-dot"></span>
+                  DE HIFI FMIPA UNPAD berhak menyelenggarakan Musyawarah Luar Biasa atas permintaan anggota penuh dan dihadiri minimal 1/2 jumlah anggota penuh dari 3 angkatan termuda HIFI FMIPA Unpad 
+                </div>
+                <div class="mlb-fact">
+                  <span class="mlb-fact-dot"></span>
+                  Musyawarah Luar Biasa dapat dilaksanakan di antara 2 (dua) Musyawarah Anggota 
+                </div>
+              </div>
+            </div>
+
+            <!-- Tujuan -->
+            <div class="mlb-col">
+              <div class="mlb-col-label">Tujuan</div>
+              <div class="mlb-fact-list">
+                <div class="mlb-fact">
+                  <span class="mlb-fact-dot"></span>
+                  Musyawarah Luar Biasa diadakan jika Badan Pengurus HIFI FMIPA Unpad tidak dapat menjalankan fungsi dan kewajibannya atau melakukan tindakan yang bertentangan dengan AD/ART 
+                </div>
+                <div class="mlb-fact">
+                  <span class="mlb-fact-dot"></span>
+                  Musyawarah Luar Biasa bertujuan untuk membahas dan menyelesaikan masalah-masalah yang dianggap dan atau bersifat luar biasa 
+                </div>
+                <div class="mlb-fact">
+                  <span class="mlb-fact-dot"></span>
+                  Meninjau &amp; menetapkan AD/ART HIFI FMIPA Unpad
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /.mlb-body -->
+        </div><!-- /.mlb-box -->
+
+      </div><!-- /.musang-right -->
+    </div><!-- /.musang-content -->
+  </div><!-- /.section-inner -->
+</section>
+
+
+<section class="section" id="dokumen" style="background:#ebeae8;padding:90px 5%;">
+  <div class="section-inner">
+    <div class="s-header reveal">
+      <div class="s-eyebrow">Landasan Hukum</div>
+      <h2 class="s-title">Dokumen <em>Resmi</em> <br> BP & DE HIFI FMIPA Unpad</h2>
+      <p class="s-desc">Seluruh kegiatan dan kebijakan Badan Pengurus serta Dewan berlandaskan pada konstitusi HIFI FMIPA Unpad.</p>
+    </div>
+ 
+    <div class="open-hint reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Klik buku untuk membuka isi dokumen
+    </div>
+ 
+    <div class="book-shelf reveal">
+ 
+      <!-- Book 1: Undang-Undang -->
+      <div class="book-wrap book-pp" onclick="window.open('https://drive.google.com/file/d/15eqOD-ZGWeLf5sipSQ723QI9N7zOV3XK/view','_BLANK')">
+        <div class="book-3d">
+          <div class="book-spine">
+            <span class="book-spine-text">Peraturan Perundang-Undangan</span>
+          </div>
+          <div class="book-front">
+            <div class="book-front-top">
+              <span class="book-code">PP</span>
+              <span class="book-year">2026</span>
+            </div>
+            <div class="book-badge">PP</div>
+            <div class="book-front-bottom">
+              <div class="book-front-title">Peraturan Perundang-Undangan</div>
+              <div class="book-front-sub">BP & DE HIFI FMIPA Unpad</div>
+            </div>
+          </div>
+          
+          <div class="book-pages"></div>
+        </div>
+        <div class="book-shadow"></div>
+        <div class="book-label">
+          <div class="book-label-name">Peraturan Perundang-Undangan</div>
+          <div class="book-label-hint">Klik untuk membuka</div>
+        </div>
+      </div>
+ 
+      <!-- Book 2: GBHK -->
+      <div class="book-wrap book-gbhk-pjg" onclick="window.open('https://drive.google.com/file/d/1ni6kfvj7uZIaxPhQ-iLa6KblEzJP_mji/view?usp=sharing','_BLANK')">
+        <div class="book-3d">
+          <div class="book-spine">
+            <span class="book-spine-text">GBHK Jangka Panjang</span>
+          </div>
+          <div class="book-front">
+            <div class="book-front-top">
+              <span class="book-code">GBHK</span>
+              <span class="book-year">2023</span>
+            </div>
+            <div class="book-badge">GK</div>
+            <div class="book-front-bottom">
+              <div class="book-front-title">GBHK Jangka Panjang </div>
+              <div class="book-front-sub">BP & DE HIFI FMIPA Unpad</div>
+            </div>
+          </div>
+          
+          <div class="book-pages"></div>
+        </div>
+        <div class="book-shadow"></div>
+        <div class="book-label">
+          <div class="book-label-name">GBHK Jangka Panjang</div>
+          <div class="book-label-hint">Klik untuk membuka</div>
+        </div>
+      </div>
+ 
+      <!-- Book 3: UU Kaderisasi -->
+      <div class="book-wrap book-ADART2026" onclick="window.open('https://drive.google.com/file/d/1gw9p2k_T3LImSpRFF4lZ0Zw9wgMgwJ1U/view','_BLANK')">
+        <div class="book-3d">
+          <div class="book-spine">
+            <span class="book-spine-text">AD/ART & GBHK 2026</span>
+          </div>
+          <div class="book-front">
+            <div class="book-front-top">
+              <span class="book-code">AD/ART</span>
+              <span class="book-year">2026</span>
+            </div>
+            <div class="book-badge">AD</div>
+            <div class="book-front-bottom">
+              <div class="book-front-title">AD/ART & GBHK 2026</div>
+              <div class="book-front-sub">BP & DE HIFI FMIPA Unpad</div>
+            </div>
+          </div>
+          <div class="book-back">
+            <div class="book-back-title">AD/ART & GBHK 2026</div>
+            
+          </div>
+          <div class="book-pages"></div>
+        </div>
+        <div class="book-shadow"></div>
+        <div class="book-label">
+          <div class="book-label-name">AD/ART & GBHK HIFI FMIPA Unpad 2026</div>
+          <div class="book-label-hint">Klik untuk membuka</div>
+        </div>
+      </div>
+ 
+      <!-- Book 4: UU Pemilu -->
+      <div class="book-wrap book-pemilu" onclick="window.open('https://drive.google.com/file/d/1Ww5I61Fx2b6tTEicGD-UADoWGOWBiP5X/view','_BLANK')">
+        <div class="book-3d">
+          <div class="book-spine">
+            <span class="book-spine-text">UU Pemilu Raya</span>
+          </div>
+          <div class="book-front">
+            <div class="book-front-top">
+              <span class="book-code">PEMILU</span>
+              <span class="book-year">2026</span>
+            </div>
+            <div class="book-badge">PE</div>
+            <div class="book-front-bottom">
+              <div class="book-front-title">UU Pemilu HIFI FMIPA Unpad</div>
+              <div class="book-front-sub">BP & DE HIFI FMIPA Unpad</div>
+            </div>
+          </div>
+                    <div class="book-pages"></div>
+        </div>
+        <div class="book-shadow"></div>
+        <div class="book-label">
+          <div class="book-label-name">UU Pemilu HIFI FMIPA Unpad </div>
+          <div class="book-label-hint">Klik untuk membuka</div>
+        </div>
+      </div>
+      
+      <!-- Book 5: UU Kaderisasi -->
+      <div class="book-wrap book-UUKADER" onclick="window.open('https://drive.google.com/file/d/12hM523a9QNFTFyw8NVGK2VTeg9E5vVIo/view','_BLANK')">
+        <div class="book-3d">
+          <div class="book-spine">
+            <span class="book-spine-text">UU Kaderisasi</span>
+          </div>
+          <div class="book-front">
+            <div class="book-front-top">
+              <span class="book-code">KADERISASI</span>
+              <span class="book-year">2026</span>
+            </div>
+            <div class="book-badge">UK</div>
+            <div class="book-front-bottom">
+              <div class="book-front-title">UU Kaderisasi HIFI FMIPA Unpad</div>
+              <div class="book-front-sub">BP HIFI FMIPA Unpad</div>
+            </div>
+          </div>
+          <div class="book-pages"></div>
+        </div>
+        <div class="book-shadow"></div>
+        <div class="book-label">
+          <div class="book-label-name">UU Kaderisasi HIFI FMIPA Unpad </div>
+          <div class="book-label-hint">Klik untuk membuka</div>
+        </div>
+      </div>
+
+      <!-- Book 5: Musang -->
+      <div class="book-wrap book-Musang" onclick="window.open('https://drive.google.com/drive/folders/1_qCc01XVccZ0kRhoMCqI4fw3r1T-p0hZ?usp=sharing','_BLANK')">
+        <div class="book-3d">
+          <div class="book-spine">
+            <span class="book-spine-text">Musyawarah Anggota HIFI FMIPA Unpad</span>
+          </div>
+          <div class="book-front">
+            <div class="book-front-top">
+              <span class="book-code">MUSANG</span>
+              <span class="book-year">2026</span>
+            </div>
+            <div class="book-badge">MS</div>
+            <div class="book-front-bottom">
+              <div class="book-front-title">Musyawarah Anggota HIFI FMIPA Unpad</div>
+              <div class="book-front-sub">BP & DE HIFI FMIPA Unpad</div>
+            </div>
+          </div>
+          <div class="book-pages"></div>
+        </div>
+        <div class="book-shadow"></div>
+        <div class="book-label">
+          <div class="book-label-name">Musyawarah Anggota HIFI FMIPA Unpad </div>
+          <div class="book-label-hint">Klik untuk membuka</div>
+        </div>
+      </div>
+
+      <!-- Book 5: lkdewan -->
+      <div class="book-wrap book-LKDewan" onclick="window.open('https://drive.google.com/drive/u/6/folders/12oF1mmGA1qovTjdBDkTsQqsXzpS8COqS','_BLANK')">
+        <div class="book-3d">
+          <div class="book-spine">
+            <span class="book-spine-text">Laporan Kegiatan Dewan HIFI FMIPA Unpad</span>
+          </div>
+          <div class="book-front">
+            <div class="book-front-top">
+              <span class="book-code">lkdewan</span>
+              <span class="book-year">2026</span>
+            </div>
+            <div class="book-badge">LK</div>
+            <div class="book-front-bottom">
+              <div class="book-front-title">Laporan Kegiatan Dewan HIFI FMIPA Unpad</div>
+              <div class="book-front-sub">DE HIFI FMIPA Unpad</div>
+            </div>
+          </div>
+          <div class="book-pages"></div>
+        </div>
+        <div class="book-shadow"></div>
+        <div class="book-label">
+          <div class="book-label-name">Laporan Kegiatan Dewan HIFI FMIPA Unpad</div>
+          <div class="book-label-hint">Klik untuk membuka</div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+<!-- KALENDER -->
+<section class="section" id="kalender" style="background:var(--surface);padding:90px 5%;">
+  <div class="section-inner">
+    <div class="s-header reveal">
+      <div class="s-eyebrow">Linimasa Resmi</div>
+      <h2 class="s-title">Kalender <em>Kegiatan</em> Dewan</h2>
+      <p class="s-desc">Kalender kegiatan Dewan HIFI FMIPA Unpad secara real-time.</p>
+    </div>
+ 
+    <div class="kalender-wrap reveal">
+      <!-- Top bar -->
+      <div class="kalender-topbar">
+        <div class="kalender-topbar-left">
+          <div class="kalender-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C41E0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <div>
+            <div class="kalender-topbar-title">Google Calendar — Dewan HIFI FMIPA Unpad</div>
+            <div class="kalender-topbar-sub">Diperbarui otomatis · Zona waktu: WIB (UTC+7)</div>
+          </div>
+        </div>
+        <a href="https://calendar.google.com" target="_blank" class="kalender-open-btn">
+          Buka di Google Calendar
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+ 
+      <!-- Calendar iframe -->
+      <!-- ═══════════════════════════════════════════════════════════════════
+           KONFIGURASI KALENDER:
+           1. Buka Google Calendar dengan akun resmi Dewan
+           2. Settings > Pilih kalender > "Integrate calendar"
+           3. Salin URL dari bagian "Public URL to this calendar"
+           4. Tempel URL tersebut ke atribut src di bawah ini
+           Contoh src:
+           https://calendar.google.com/calendar/embed?src=CALENDAR_ID%40group.calendar.google.com&ctz=Asia%2FJakarta&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&mode=MONTH
+           ═══════════════════════════════════════════════════════════════════ -->
+      <div class="kalender-iframe-box" id="kalenderBox">
+ 
+        <!-- PLACEHOLDER — tampil saat src belum dikonfigurasi -->
+        <div class="kalender-placeholder" id="kalenderPlaceholder">
+          <div class="kalender-placeholder-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C41E0E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <h3>Hubungkan Google Calendar</h3>
+          <p>Kalender resmi Dewan HIFI belum dikonfigurasi. Ikuti langkah berikut untuk menampilkan jadwal kegiatan secara otomatis.</p>
+          <div class="kalender-setup-steps">
+            <div class="kalender-step">
+              <div class="ks-num">01</div>
+              <div class="ks-text">Buka Google Calendar dengan akun resmi Dewan</div>
+            </div>
+            <div class="kalender-step">
+              <div class="ks-num">02</div>
+              <div class="ks-text">Settings → "Integrate calendar" → salin URL embed</div>
+            </div>
+            <div class="kalender-step">
+              <div class="ks-num">03</div>
+              <div class="ks-text">Tempel URL ke atribut <code style="background:var(--bg2);padding:1px 5px;border-radius:4px;font-size:0.7rem;">src</code> iframe di file HTML</div>
+            </div>
+          </div>
+        </div>
+ 
+       
+        <iframe
+          src=https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FJakarta&showPrint=0&src=ZGV3YW5oaWZpLnVucGFkQGdtYWlsLmNvbQ&src=OGZmNmUzMDM3ZWM5YjI2MGQ0YjBjM2M5OGMwOWQxOTRjMWRkODZhNjFlZDZiYmNkYWE4OGNiMGVlMWZjNDRiZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NTc2NDVhMDc2Y2EwZWY1MWZhMDEwZjA3MDllYzBlZTI0ODQwMjc2YWQ4NzI2NWQ2NmEzOTA1MjJkMTU0YzcwMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZWU2YmIwMTRmZDkxZTdlNzJjMmY5YTcyYTJhODBmYWE4MjFlNDYyZTVmZTcyZWY0MDBlOWMzOGZlNmEyMDlhYkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uaW5kb25lc2lhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=aGlmaXVucGFkMjAyNUBnbWFpbC5jb20&color=%238e24aa&color=%237986cb&color=%23a79b8e&color=%238e24aa&color=%230b8043&color=%23c0ca33" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>"
+          style="border:0;"
+          width="100%"
+          height="100%"
+          frameborder="0"
+          scrolling="no"
+          title="Kalender Kegiatan Dewan HIFI">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── ASPIRASI & KONTAK (MERGED) ── -->
+<section class="section" id="aspirasi" style="background:var(--bg2);padding:90px 5%;">
+  <div class="section-inner" style="text-align:center;">
+
+    <!-- Header -->
+    <div class="s-eyebrow reveal" style="justify-content:center;">Suara Kamu Penting</div>
+    <h2 class="s-title reveal" style="margin:0 auto 0.8rem;max-width:540px;">Aspirasi & <em>Kontak</em> Dewan</h2>
+    <p class="s-desc reveal" style="margin:0 auto 3rem;max-width:560px;">Ada keluhan, masukan, atau usulan? Sampaikan langsung atau hubungi kami lewat platform di bawah ini.</p>
+
+    <!-- Aspirasi Button -->
+    <div class="reveal" style="margin-bottom:3.5rem;">
+      <a href="https://your-aspirasi-link.com" target="_blank" class="aspirasi-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Kirim Aspirasimu!
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="reveal" style="display:flex;align-items:center;gap:1rem;max-width:480px;margin:0 auto 3rem;">
+      <div style="flex:1;height:1px;background:var(--line);"></div>
+      <span style="font-size:0.78rem;font-weight:600;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;">atau hubungi kami</span>
+      <div style="flex:1;height:1px;background:var(--line);"></div>
+    </div>
+
+    <!-- Contact Cards -->
+    <div class="contact-grid reveal">
+
+      <!-- Gmail -->
+      <a href="/cdn-cgi/l/email-protection#7d19180a1c1315141b143d1a101c1411531e1210" class="contact-card" target="_blank">
+        <div class="contact-icon-wrap" style="background:#fff0ee;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#C41E0E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="22,6 12,13 2,6" stroke="#C41E0E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="contact-info">
+          <div class="contact-platform">Gmail</div>
+          <div class="contact-handle"><span class="__cf_email__" data-cfemail="0662637167686e6f606f46616b676f6a2865696b">[email&#160;protected]</span></div>
+          <div class="contact-cta">Kirim Email →</div>
+        </div>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://instagram.com/dewanhifi" class="contact-card" target="_blank">
+        <div class="contact-icon-wrap" style="background:#f3eeff;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="4" stroke="#7c3aed" stroke-width="1.8"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="#7c3aed"/>
+          </svg>
+        </div>
+        <div class="contact-info">
+          <div class="contact-platform">Instagram</div>
+          <div class="contact-handle">@dewanhifi</div>
+          <div class="contact-cta">Lihat Profil →</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-logo">Dewan HIFI FMIPA Unpad</div>
+  <div class="foot-copy">© 2025 Dewan HIFI FMIPA Unpad · Mengemban amanah, melayani anggota</div>
+</footer>
+
+<!-- ── FLOATING ASPIRASI BUTTON ── -->
+<a href="#aspirasi" class="aspirasi-fab">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  Kirim Aspirasimu!
+</a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Komisi tab switcher
+  function switchKomisi(idx) {
+    document.querySelectorAll('.komisi-tab-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+    document.querySelectorAll('.komisi-tab-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  }
+
+  // Pleno stepper accordion
+  document.querySelectorAll('.pleno-step').forEach(step => {
+    step.querySelector('.pleno-step-header').addEventListener('click', () => {
+      const isOpen = step.classList.contains('open');
+      document.querySelectorAll('.pleno-step.open').forEach(s => s.classList.remove('open'));
+      if (!isOpen) step.classList.add('open');
+    });
+  });
+
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('on'), i * 70);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Active nav link highlight
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  const obs2 = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => { l.style.color=''; l.style.background=''; });
+        const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (a) { a.style.color = 'var(--blue)'; a.style.background = 'var(--blue-lt)'; }
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => obs2.observe(s));
+</script>
+</body>
+</html>
