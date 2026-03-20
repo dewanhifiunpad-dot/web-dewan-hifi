@@ -997,8 +997,13 @@ footer{
   .nav-pill{ text-align:center; }
 
   /* ── Hero ── */
-  .hero-h1-row{ flex-direction:column; align-items:flex-start; gap:1.5rem; }
-  .hero-side-logo{ height:clamp(80px,18vw,160px); }
+  .hero{
+    min-height:auto;
+    padding:calc(80px + 4vh) 5% 7vh;
+    justify-content:flex-start;
+  }
+  .hero-h1-row{ flex-direction:column; align-items:flex-start; gap:1.2rem; margin-bottom:1.2rem; }
+  .hero-side-logo{ height:clamp(80px,14vw,140px); }
 
   /* ── Profil / Kade ── */
   .kade-wrap{ grid-template-columns:1fr; }
@@ -1041,10 +1046,21 @@ footer{
   .nav-links a{ font-size:0.72rem; padding:0.35rem 0.7rem; }
 
   /* ── Hero ── */
-  .hero{ padding:0 5% 6vh; }
-  .hero-side-logo{ display:none; }           /* hide logo on tiny screens */
+  .hero{
+    min-height:auto;
+    padding:calc(64px + 5vh) 5% 6vh;
+    justify-content:flex-start;
+  }
+  .hero-h1-row{ margin-bottom:1.2rem; }
+  .hero-side-logo{
+    display:block;
+    height:clamp(64px,18vw,100px);
+  }
+  .hero h1{ font-size:clamp(2rem,9vw,3rem); }
+  .hero-sub{ font-size:0.88rem; margin-bottom:2rem; }
   .hero-chips{ gap:0.4rem; }
   .chip{ font-size:0.72rem; padding:0.4rem 0.85rem; }
+  .hero-scroll{ display:none; }
 
   /* ── Fungsi komisi → single col ── */
   .fungsi-wrap{ grid-template-columns:1fr; }
