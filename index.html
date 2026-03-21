@@ -45,59 +45,106 @@ body{
 ::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px;}
 
 /* ─── NAV ─── */
+/* ─── NAV ─── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:64px;
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  height:60px;
+  display:flex;align-items:center;justify-content:space-between;
   padding:0 5%;
-  background:rgba(250,247,247,0.95);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--line);
+  background:rgba(15,14,13,0.94);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
 }
 .logo{
   font-family:'Fraunces',serif;
-  font-size:1.1rem;
-  font-weight:600;
-  color:var(--ink);
+  font-size:1rem;font-weight:600;
+  color:#f5f0eb;
   letter-spacing:-0.01em;
-  display:flex;align-items:center;gap:0.5rem;
+  display:flex;align-items:center;gap:0.55rem;
   white-space:nowrap;
+  text-decoration:none;
+}
+.logo-img{
+  width:26px;height:26px;
+  border-radius:50%;
+  object-fit:cover;flex-shrink:0;
 }
 .logo-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--blue);
-  flex-shrink:0;
-  display:inline-block;
+  width:7px;height:7px;border-radius:50%;
+  background:#C41E0E;flex-shrink:0;display:inline-block;
 }
 .nav-links{
-  display:flex;gap:0.15rem;
-  justify-content:center;
-  align-items:center;
+  display:flex;align-items:center;gap:0.1rem;
 }
 .nav-links a{
-  padding:0.45rem 1rem;
-  color:var(--ink2);
+  padding:0.4rem 0.85rem;
+  color:rgba(245,240,235,0.55);
   text-decoration:none;
-  font-size:0.78rem;
-  font-weight:600;
-  border-radius:99px;
-  transition:background 0.2s,color 0.2s;
+  font-size:0.75rem;font-weight:500;
+  border-radius:7px;
+  transition:background 0.15s,color 0.15s;
   white-space:nowrap;
 }
-.nav-links a:hover{background:var(--bg2);color:var(--ink);}
-.nav-pill{
-  padding:0.45rem 1.1rem;
-  background:var(--bag);
-  color:#fff;
-  font-size:0.78rem;
-  font-weight:600;
-  border-radius:99px;
-  text-decoration:none;
-  transition:background 0.2s;
+.nav-links a:hover{
+  background:rgba(255,255,255,0.07);
+  color:#f5f0eb;
 }
-.nav-pill:hover{background:var(--bag-dk);}
+.nav-pill{
+  padding:0.42rem 1.1rem;
+  background:#C41E0E;
+  color:#f5f0eb;
+  font-size:0.75rem;font-weight:700;
+  border-radius:7px;
+  text-decoration:none;
+  transition:background 0.15s,transform 0.15s;
+  white-space:nowrap;
+}
+.nav-pill:hover{background:#a51a0c;transform:translateY(-1px);}
+
+/* ── Hamburger ── */
+.nav-hamburger{
+  display:none;
+  flex-direction:column;gap:5px;
+  cursor:pointer;padding:4px;
+  background:none;border:none;
+}
+.nav-hamburger span{
+  display:block;width:22px;height:2px;
+  background:#f5f0eb;border-radius:2px;
+  transition:all 0.25s;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ── Mobile drawer ── */
+.nav-mobile{
+  display:none;
+  position:fixed;top:60px;left:0;right:0;z-index:299;
+  background:rgba(15,14,13,0.97);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding:0.75rem 5% 1rem;
+  flex-direction:column;gap:0.2rem;
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  animation:slideDown 0.22s ease;
+}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{
+  font-size:0.85rem;font-weight:500;
+  color:rgba(245,240,235,0.65);
+  text-decoration:none;
+  padding:0.65rem 0.8rem;border-radius:8px;
+  transition:background 0.15s,color 0.15s;
+}
+.nav-mobile a:hover{background:rgba(255,255,255,0.06);color:#f5f0eb;}
+.nav-mobile .nav-pill{
+  margin-top:0.4rem;text-align:center;
+  padding:0.7rem;border-radius:9px;
+  font-size:0.82rem;
+}
 
 
 /* ─── HERO H1 + LOGO ROW ─── */
@@ -129,7 +176,7 @@ nav{
   min-height:100vh;
   display:flex;flex-direction:column;
   align-items:flex-start;justify-content:flex-end;
-  padding:0 5% 8vh;
+  padding:calc(60px + 8vh) 5% 8vh;
   position:relative;
   overflow:hidden;
   background:linear-gradient(135deg,#0d2040 0%,#12233d 60%,#1a0a0a 100%);
@@ -266,105 +313,324 @@ nav{
 /* ─── DIVIDER ─── */
 hr.dim{border:none;border-top:1px solid var(--line);margin:3rem 0;}
 
-/* ─── PROFIL DEWAN ─── */
-#profil{background:var(--surface);}
+/* ═══════════════════════════════════════════
+   PROFIL DEWAN — CARD SYSTEM v3
+   ═══════════════════════════════════════════ */
+#profil{ background:var(--surface); }
 
-/* KaDe card */
-.kade-wrap{
-  display:grid;grid-template-columns:auto 1fr;gap:2.5rem;
-  padding:2.5rem;
-  border-radius:var(--r);
-  border:1px solid var(--line);
-  background:var(--bg);
-  margin-bottom:2.5rem;
-  position:relative;overflow:hidden;
-}
-.kade-wrap::after{
-  content:'Ketua Dewan';
-  position:absolute;top:1.8rem;right:2rem;
-  font-size:0.65rem;font-weight:700;
-  letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--blue);
-  background:var(--blue-lt);
-  padding:0.25rem 0.75rem;
-  border-radius:99px;
-}
+/* ── Shared avatar base ── */
 .ava{
-  width:80px;height:80px;border-radius:50%;
+  border-radius:50%;
   background:linear-gradient(135deg,var(--blue) 0%,#e85a4d 100%);
   display:flex;align-items:center;justify-content:center;
-  font-family:'Fraunces',serif;
-  font-size:1.6rem;font-weight:600;
+  font-family:'Fraunces',serif;font-weight:600;
   color:#fff;flex-shrink:0;
-  overflow:hidden;
-  position:relative;
+  overflow:hidden;position:relative;
 }
 .ava img{
-  position:absolute;
-  inset:0;
+  position:absolute;inset:0;
   width:100%;height:100%;
-  object-fit:cover;
-  object-position:center top;
-  border-radius:50%;
-  /* hide initials text when photo loads */
-  z-index:1;
+  object-fit:cover;object-position:center top;
+  border-radius:50%;z-index:1;
 }
-/* Ring border on photo avatars */
-.ava img ~ *{ display:none; } /* hide initials span when img present */
-.ava.sm{width:52px;height:52px;font-size:1rem;}
-.ava.blue{background:linear-gradient(135deg,var(--bag),#3a6fbd);}
-.ava.teal{background:linear-gradient(135deg,#0d9488,#2dd4bf);}
-.ava.violet{background:linear-gradient(135deg,#7c3aed,#a78bfa);}
-.ava.rose{background:linear-gradient(135deg,var(--blue),#e85a4d);}
-.ava.amber{background:linear-gradient(135deg,#d97706,#fbbf24);}
-.ava.slate{background:linear-gradient(135deg,var(--bag-dk),#3a6fbd);}
-.ava.green{background:linear-gradient(135deg,#15803d,#4ade80);}
-/* Photo ring — shows when avatar has a real photo */
-.ava.has-photo{
-  box-shadow:0 0 0 2px var(--surface), 0 0 0 3.5px var(--line);
-}
-.person-role{font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:0.3rem;}
-.person-name{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;color:var(--ink);letter-spacing:-0.01em;margin-bottom:0.2rem;}
-.person-nim{font-size:0.77rem;color:var(--muted);margin-bottom:0.9rem;}
-.person-bio{font-size:0.85rem;color:var(--ink2);line-height:1.75;}
+.ava img ~ *{ display:none; }
+.ava.blue  { background:linear-gradient(135deg,var(--bag),#3a6fbd); }
+.ava.teal  { background:linear-gradient(135deg,#0d9488,#2dd4bf); }
+.ava.violet{ background:linear-gradient(135deg,#7c3aed,#a78bfa); }
+.ava.rose  { background:linear-gradient(135deg,var(--blue),#e85a4d); }
+.ava.amber { background:linear-gradient(135deg,#d97706,#fbbf24); }
+.ava.slate { background:linear-gradient(135deg,var(--bag-dk),#3a6fbd); }
+.ava.green { background:linear-gradient(135deg,#15803d,#4ade80); }
+.ava.sm    { width:48px;height:48px;font-size:0.95rem; }
+.ava.has-photo{ box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px var(--line); }
 
-/* Komisi blocks */
-.komisi-section{margin-bottom:0;}
+/* ════════════════════════════════════════════════════
+   1. KETUA DEWAN — Sovereign Dark Banner
+   ════════════════════════════════════════════════════ */
+.kade-wrap{
+  position:relative;overflow:hidden;
+  border-radius:24px;
+  margin-bottom:3.5rem;
+  background:#1a0f0e;
+  box-shadow:0 24px 80px rgba(26,15,14,0.28), 0 2px 0 rgba(201,169,110,0.4);
+}
+.kade-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 100% at 105% 50%, rgba(196,30,14,0.2) 0%, transparent 58%),
+    radial-gradient(ellipse 55% 80% at -5% 100%, rgba(58,40,40,0.6) 0%, transparent 55%);
+  pointer-events:none;
+}
+.kade-wrap::after{
+  content:'';
+  position:absolute;top:0;left:-100%;height:2px;width:200%;
+  background:linear-gradient(90deg,transparent,#c9a96e 40%,#fff8e0 55%,#c9a96e 70%,transparent);
+  animation:goldShimmer 4s ease-in-out infinite;
+}
+@keyframes goldShimmer{ 0%{left:-100%} 60%,100%{left:50%} }
+
+.kade-inner{
+  position:relative;z-index:1;
+  display:flex;align-items:center;
+  gap:0;
+}
+.kade-left{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1rem;
+  padding:3rem 3rem;
+  flex-shrink:0;
+  border-right:1px solid rgba(255,255,255,0.05);
+}
+/* gold conic ring */
+.kade-ava-ring{
+  width:128px;height:128px;
+  border-radius:50%;
+  background:conic-gradient(#c9a96e 0deg,#f0d090 60deg,#8a6020 130deg,#f0d090 200deg,#c9a96e 270deg,#f0d090 360deg);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;flex-shrink:0;
+}
+.kade-ava-ring::before{
+  content:'';position:absolute;inset:4px;
+  border-radius:50%;background:#1a0f0e;z-index:0;
+}
+.kade-ava{
+  width:112px;height:112px;border-radius:50%;
+  background:linear-gradient(135deg,#1b3f72,#3a6fbd);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:2.6rem;font-weight:600;
+  color:#f0d090;position:relative;z-index:1;overflow:hidden;
+}
+.kade-ava img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center top;border-radius:50%;z-index:1;
+}
+.kade-ava img ~ *{ display:none; }
+.kade-ornament{
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:0.56rem;font-weight:700;
+  letter-spacing:0.24em;text-transform:uppercase;
+  color:rgba(201,169,110,0.45);white-space:nowrap;
+}
+.kade-right{
+  padding:2.8rem 3rem 2.8rem 2.8rem;
+  display:flex;flex-direction:column;justify-content:center;flex:1;
+}
+.kade-crown{
+  margin-bottom:1rem;
+}
+.kade-crown-badge{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.57rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;
+  color:#c9a96e;
+  background:rgba(201,169,110,0.1);
+  border:1px solid rgba(201,169,110,0.25);
+  padding:0.24rem 0.8rem;border-radius:99px;
+  display:inline-block;
+}
+.kade-name{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.9rem,3.2vw,2.7rem);
+  font-weight:600;line-height:1.05;letter-spacing:-0.025em;
+  color:#fff;margin-bottom:0.3rem;
+}
+.kade-nim{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.72rem;color:rgba(255,255,255,0.28);
+  font-weight:500;letter-spacing:0.06em;margin-bottom:1.3rem;
+}
+.kade-bio{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.84rem;color:rgba(255,255,255,0.45);
+  line-height:1.85;max-width:500px;
+}
+.kade-stats{
+  display:flex;gap:2.5rem;margin-top:1.8rem;
+  padding-top:1.5rem;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.kade-stat{ display:flex;flex-direction:column;gap:0.18rem; }
+.kade-stat-val{
+  font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;
+  color:#c9a96e;line-height:1;
+}
+.kade-stat-lbl{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.58rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.22);
+}
+
+/* ════════════════════════════════════════════════════
+   2. KOMISI DIVIDER ROW
+   ════════════════════════════════════════════════════ */
+.komisi-section{ margin-bottom:0; }
 .komisi-label-row{
-  display:flex;align-items:center;gap:1rem;
-  padding:1.5rem 0;
+  display:flex;align-items:center;gap:1.4rem;
+  padding:2.4rem 0 1.6rem;
   border-top:1px solid var(--line);
+  margin-top:0.5rem;
 }
 .k-num{
-  font-family:'Fraunces',serif;
-  font-size:3rem;font-weight:300;
-  color:var(--line);
-  line-height:1;flex-shrink:0;
-  width:56px;text-align:right;
+  font-family:'Fraunces',serif;font-size:3.2rem;font-weight:300;
+  color:var(--line);line-height:1;flex-shrink:0;width:58px;text-align:right;
 }
-.k-info{}
-.k-name{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:600;color:var(--ink);letter-spacing:-0.01em;}
-.k-sub{font-size:0.72rem;color:var(--muted);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.1rem;}
+.k-name{ font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;color:var(--ink);letter-spacing:-0.015em; }
+.k-sub{ font-family:'Plus Jakarta Sans',sans-serif;font-size:0.65rem;color:var(--muted);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.15rem; }
 
-.members-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-  gap:1px;
-  background:var(--line);
+/* ════════════════════════════════════════════════════
+   3. KETUA KOMISI — Wide accent card
+   ════════════════════════════════════════════════════ */
+.ketua-komisi-wrap{ margin-bottom:1.2rem; }
+
+.ketua-komisi-card{
+  display:flex;align-items:center;gap:2rem;
+  padding:1.6rem 2.4rem 1.6rem 1.8rem;
+  border-radius:18px;
+  position:relative;overflow:hidden;
+  background:var(--bg);
   border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-  margin-bottom:2rem;
+  transition:transform 0.25s ease, box-shadow 0.25s ease;
+}
+/* colored left border stripe per komisi */
+.ketua-komisi-card::before{
+  content:'';
+  position:absolute;top:0;left:0;bottom:0;width:4px;
+  border-radius:18px 0 0 18px;
+}
+.k1-card::before{ background:linear-gradient(180deg,#0d9488,#2dd4bf); }
+.k2-card::before{ background:linear-gradient(180deg,var(--bag),#3a6fbd); }
+.k3-card::before{ background:linear-gradient(180deg,#7c3aed,#a78bfa); }
+
+/* large watermark number */
+.ketua-komisi-card::after{
+  font-family:'Fraunces',serif;font-size:7rem;font-weight:300;
+  position:absolute;right:2rem;top:50%;transform:translateY(-50%);
+  line-height:1;pointer-events:none;opacity:1;
+}
+.k1-card::after{ content:'I';   color:rgba(13,148,136,0.07); }
+.k2-card::after{ content:'II';  color:rgba(27,63,114,0.07); }
+.k3-card::after{ content:'III'; color:rgba(124,58,237,0.07); }
+
+.ketua-komisi-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 32px rgba(0,0,0,0.07);
+}
+.k1-card:hover{ box-shadow:0 10px 32px rgba(13,148,136,0.1); }
+.k2-card:hover{ box-shadow:0 10px 32px rgba(27,63,114,0.1); }
+.k3-card:hover{ box-shadow:0 10px 32px rgba(124,58,237,0.1); }
+
+/* avatar */
+.ketua-ava{
+  width:80px;height:80px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:1.6rem;font-weight:600;
+  color:#fff;flex-shrink:0;overflow:hidden;position:relative;z-index:1;
+}
+.ketua-ava img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center top;border-radius:50%;z-index:1;
+}
+.ketua-ava img ~ *{ display:none; }
+.k1-ava{ background:linear-gradient(135deg,#0d9488,#2dd4bf); box-shadow:0 4px 18px rgba(13,148,136,0.3); }
+.k2-ava{ background:linear-gradient(135deg,var(--bag),#3a6fbd);  box-shadow:0 4px 18px rgba(27,63,114,0.35); }
+.k3-ava{ background:linear-gradient(135deg,#7c3aed,#a78bfa);    box-shadow:0 4px 18px rgba(124,58,237,0.3); }
+
+.ketua-info{ position:relative;z-index:1; }
+.ketua-badge{
+  display:inline-block;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.57rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;
+  padding:0.22rem 0.7rem;border-radius:99px;margin-bottom:0.5rem;
+}
+.k1-badge{ background:rgba(13,148,136,0.1); color:#0a7168; border:1px solid rgba(13,148,136,0.18); }
+.k2-badge{ background:rgba(27,63,114,0.09); color:#1b3f72; border:1px solid rgba(27,63,114,0.18); }
+.k3-badge{ background:rgba(124,58,237,0.09);color:#6d28d9; border:1px solid rgba(124,58,237,0.18); }
+.ketua-name{
+  font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;
+  color:var(--ink);letter-spacing:-0.015em;margin-bottom:0.3rem;line-height:1.2;
+}
+.ketua-nim{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.7rem;color:var(--muted);font-weight:500;
+}
+
+/* ════════════════════════════════════════════════════
+   4. ANGGOTA GRID — Portrait cards, generous size
+   ════════════════════════════════════════════════════ */
+.members-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+  gap:10px;
+  margin-top:4px;margin-bottom:3rem;
 }
 .member-card{
-  display:flex;align-items:center;gap:1rem;
-  padding:1.1rem 1.3rem;
-  background:var(--surface);
-  transition:background 0.2s;
+  display:flex;flex-direction:column;align-items:center;
+  padding:1.6rem 1.2rem 1.4rem;
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  text-align:center;
+  gap:0.8rem;
+  transition:background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  position:relative;overflow:hidden;
 }
-.member-card:hover{background:var(--bg);}
-.mc-info .person-name{font-size:0.9rem;margin-bottom:0.05rem;}
-.mc-info .person-nim{margin-bottom:0;font-size:0.72rem;}
-.mc-info .person-role{margin-bottom:0.1rem;font-size:0.62rem;}
+.member-card::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--line);
+  transition:background 0.2s;
+  border-radius:0 0 16px 16px;
+}
+.member-card:hover{
+  background:var(--bg);
+  border-color:rgba(196,30,14,0.15);
+  transform:translateY(-3px);
+  box-shadow:0 10px 28px rgba(0,0,0,0.07);
+}
+.member-card:hover::after{ background:var(--blue); }
+
+/* index badge top-right */
+.mc-index{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.58rem;font-weight:700;
+  color:var(--muted);
+  position:absolute;top:0.8rem;right:0.9rem;
+  letter-spacing:0.04em;
+}
+/* avatar */
+.mc-ava{
+  width:64px;height:64px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:1.2rem;font-weight:600;
+  color:#fff;flex-shrink:0;overflow:hidden;position:relative;
+  box-shadow:0 4px 14px rgba(0,0,0,0.12);
+}
+.mc-ava img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center top;border-radius:50%;z-index:1;
+}
+.mc-ava img ~ *{ display:none; }
+.mc-ava.blue  { background:linear-gradient(135deg,var(--bag),#3a6fbd); }
+.mc-ava.teal  { background:linear-gradient(135deg,#0d9488,#2dd4bf); }
+.mc-ava.violet{ background:linear-gradient(135deg,#7c3aed,#a78bfa); }
+.mc-ava.rose  { background:linear-gradient(135deg,var(--blue),#e85a4d); }
+.mc-ava.amber { background:linear-gradient(135deg,#d97706,#fbbf24); }
+.mc-ava.slate { background:linear-gradient(135deg,var(--bag-dk),#3a6fbd); }
+.mc-ava.green { background:linear-gradient(135deg,#15803d,#4ade80); }
+
+.mc-info{ display:flex;flex-direction:column;align-items:center;gap:0.15rem; }
+.mc-info .mc-name{
+  font-family:'Fraunces',serif;font-size:0.88rem;font-weight:600;
+  color:var(--ink);line-height:1.3;
+}
+.mc-info .mc-nim{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.65rem;color:var(--muted);
+}
+
+/* shared text tokens */
+.person-role{ font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:0.3rem; }
+.person-name{ font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;color:var(--ink);letter-spacing:-0.01em;margin-bottom:0.2rem; }
+.person-nim{ font-family:'Plus Jakarta Sans',sans-serif;font-size:0.77rem;color:var(--muted);margin-bottom:0.9rem; }
+.person-bio{ font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;color:var(--ink2);line-height:1.75; }
 
 /* ─── FUNGSI KOMISI ─── */
 #komisi{background:var(--bg);}
@@ -982,19 +1248,14 @@ footer{
 /* ═══════════════════════════════════════════════
    RESPONSIVE — TABLET  (≤ 900px)
    ═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — TABLET  (≤ 900px)
+   ═══════════════════════════════════════════════ */
 @media(max-width:900px){
 
   /* ── Nav ── */
-  nav{
-    grid-template-columns:1fr;
-    height:auto;
-    padding:0.75rem 5%;
-    display:flex;
-    flex-direction:column;
-    gap:0.5rem;
-  }
-  .nav-links{ flex-wrap:wrap; justify-content:center; }
-  .nav-pill{ text-align:center; }
+  .nav-links{ display:none; }
+  .nav-hamburger{ display:flex; }
 
   /* ── Hero ── */
   .hero{
@@ -1005,8 +1266,24 @@ footer{
   .hero-h1-row{ flex-direction:column; align-items:flex-start; gap:1.2rem; margin-bottom:1.2rem; }
   .hero-side-logo{ height:clamp(80px,14vw,140px); }
 
-  /* ── Profil / Kade ── */
-  .kade-wrap{ grid-template-columns:1fr; }
+  /* ── KaDe — stack vertically at tablet ── */
+  .kade-inner{ flex-direction:column; }
+  .kade-left{
+    border-right:none;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    padding:2.4rem 2.4rem 2rem;
+    flex-direction:row;
+    gap:1.8rem;
+    justify-content:flex-start;
+    align-items:center;
+  }
+  .kade-right{ padding:2rem 2.4rem 2.4rem; }
+
+  /* ── Ketua Komisi ── */
+  .ketua-komisi-card{ gap:1.6rem; }
+
+  /* ── Anggota — 3 cols on tablet ── */
+  .members-grid{ grid-template-columns:repeat(3,1fr); gap:8px; }
 
   /* ── Fungsi komisi ── */
   .fungsi-wrap{ grid-template-columns:1fr 1fr; }
@@ -1043,7 +1320,7 @@ footer{
   .section{ padding:70px 5%; }
 
   /* ── Nav ── */
-  .nav-links a{ font-size:0.72rem; padding:0.35rem 0.7rem; }
+  /* nav handled by hamburger above */
 
   /* ── Hero ── */
   .hero{
@@ -1052,15 +1329,34 @@ footer{
     justify-content:flex-start;
   }
   .hero-h1-row{ margin-bottom:1.2rem; }
-  .hero-side-logo{
-    display:block;
-    height:clamp(64px,18vw,100px);
-  }
+  .hero-side-logo{ display:block; height:clamp(64px,18vw,100px); }
   .hero h1{ font-size:clamp(2rem,9vw,3rem); }
   .hero-sub{ font-size:0.88rem; margin-bottom:2rem; }
   .hero-chips{ gap:0.4rem; }
   .chip{ font-size:0.72rem; padding:0.4rem 0.85rem; }
   .hero-scroll{ display:none; }
+
+  /* ── KaDe ── */
+  .kade-left{ padding:1.8rem 1.6rem 1.6rem; gap:1.2rem; }
+  .kade-right{ padding:1.6rem 1.8rem 2rem; }
+  .kade-ava{ width:72px;height:72px;font-size:1.6rem; }
+  .kade-ava-ring{ width:84px;height:84px; }
+  .kade-name{ font-size:1.8rem; }
+  .kade-stats{ gap:1.4rem; flex-wrap:wrap; margin-top:1.4rem; padding-top:1.2rem; }
+  .kade-stat-val{ font-size:1.15rem; }
+  .kade-bio{ font-size:0.8rem; }
+
+  /* ── Ketua Komisi ── */
+  .ketua-komisi-card{ padding:1.3rem 1.5rem; gap:1.2rem; }
+  .ketua-ava{ width:58px;height:58px;font-size:1.1rem; }
+  .ketua-name{ font-size:1.05rem; }
+
+  /* ── Anggota — 2 cols on mobile ── */
+  .members-grid{ grid-template-columns:repeat(2,1fr); gap:8px; }
+  .member-card{ padding:1.3rem 0.9rem 1.1rem; }
+  .mc-ava{ width:52px;height:52px;font-size:1rem; }
+  .mc-info .mc-name{ font-size:0.8rem; }
+  .mc-info .mc-nim{ font-size:0.6rem; }
 
   /* ── Fungsi komisi → single col ── */
   .fungsi-wrap{ grid-template-columns:1fr; }
@@ -1069,10 +1365,6 @@ footer{
   /* ── Komisi tabs → stack buttons ── */
   .komisi-tab-btns{ grid-template-columns:1fr !important; }
   .komisi-tabs-wrap{ max-width:100% !important; }
-
-  /* ── Profil kade ── */
-  .kade-wrap{ padding:1.5rem; gap:1.5rem; }
-  .members-grid{ grid-template-columns:1fr; }
 
   /* ── KPU stat ── */
   .kpu-stat{ padding:1.2rem 1.4rem; gap:1rem; }
@@ -1096,9 +1388,11 @@ footer{
   .kalender-topbar{ padding:1rem 1.2rem; }
   .kalender-topbar-title{ font-size:0.85rem; }
 
-  /* ── Contact grid → full width cards ── */
-  .contact-grid{ grid-template-columns:1fr; max-width:100%; }
-  .contact-card{ padding:1.2rem 1.4rem; }
+  /* ── Contact grid ── */
+  .contact-grid{ grid-template-columns:1fr 1fr; max-width:100%; gap:0.75rem; }
+  .contact-card-body{ padding:1.6rem 1.2rem 1.2rem; }
+  .contact-handle{ font-size:0.78rem; }
+  .contact-cta{ font-size:0.72rem; padding:0.65rem 1rem; }
 
   /* ── Aspirasi FAB ── */
   .aspirasi-fab{ bottom:1.2rem; right:1.2rem; font-size:0.75rem; padding:0.65rem 1.1rem; }
@@ -1106,11 +1400,37 @@ footer{
   /* ── Section titles ── */
   .s-header{ margin-bottom:2.5rem; }
 
-  /* ── MLB box ── */
+  /* ── MLB ── */
   .mlb-banner{ flex-direction:column; align-items:flex-start; gap:0.6rem; }
 
-  /* ── Peserta label row ── */
+  /* ── Peserta ── */
   .peserta-label{ flex-direction:column; align-items:flex-start; gap:0.5rem; }
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE  (≤ 380px)
+   ═══════════════════════════════════════════════ */
+@media(max-width:380px){
+
+  /* ── KaDe left col: stack vertically ── */
+  .kade-left{ flex-direction:column; align-items:center; text-align:center; padding:1.8rem 1.4rem 1.4rem; }
+
+  /* ── Anggota — single col on tiny screens ── */
+  .members-grid{ grid-template-columns:1fr; }
+  .member-card{ flex-direction:row; align-items:center; padding:1rem 1.1rem; gap:1rem; text-align:left; }
+  .mc-info{ align-items:flex-start; }
+
+  /* ── Ketua Komisi ── */
+  .ketua-komisi-card{ padding:1.2rem 1.2rem; gap:1rem; }
+  .ketua-ava{ width:52px;height:52px;font-size:1rem; }
+
+  /* ── Contact grid tiny ── */
+  .contact-grid{ gap:0.6rem; }
+  .contact-handle{ font-size:0.72rem; }
+
+  /* ── Chips ── */
+  .hero-chips{ gap:0.35rem; }
+  .chip{ font-size:0.68rem; padding:0.35rem 0.75rem; }
 }
 
     /* ── KOMISI TABS ── */
@@ -1391,54 +1711,147 @@ footer{
 }
 .ks-text{font-size:0.75rem;color:var(--ink2);line-height:1.5;padding-top:0.1rem;}
  
+/* ─── ASPIRASI & KONTAK ─── */
 .contact-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:1.25rem;
-  max-width:680px;
+  grid-template-columns:1fr 1fr;
+  gap:1.2rem;
+  max-width:580px;
   margin:0 auto;
 }
+
+/* ── Base card ── */
 .contact-card{
   display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:1.25rem;
-  padding:1.6rem 1.8rem;
-  border-radius:18px;
-  background:var(--surface);
-  border:1.5px solid var(--line);
   text-decoration:none;
-  color:var(--ink);
-  transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  color:inherit;
+  border-radius:24px;
+  overflow:hidden;
+  position:relative;
+  transition:transform 0.28s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.28s;
 }
-.contact-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 12px 36px rgba(0,0,0,0.08);
-  border-color:var(--blue);
+.contact-card:hover{ transform:translateY(-6px); }
+
+/* ── Gmail card — warm red-ink ── */
+.contact-card-gmail{
+  background:#1a0a09;
+  box-shadow:0 8px 32px rgba(196,30,14,0.18);
+  border:1px solid rgba(196,30,14,0.2);
 }
+.contact-card-gmail::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(196,30,14,0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255,100,80,0.1) 0%, transparent 55%);
+  pointer-events:none;
+}
+.contact-card-gmail:hover{
+  box-shadow:0 20px 56px rgba(196,30,14,0.32);
+  border-color:rgba(196,30,14,0.45);
+}
+
+/* ── Instagram card — violet-indigo ── */
+.contact-card-ig{
+  background:#0e0818;
+  box-shadow:0 8px 32px rgba(124,58,237,0.18);
+  border:1px solid rgba(124,58,237,0.2);
+}
+.contact-card-ig::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(236,72,153,0.12) 0%, transparent 55%);
+  pointer-events:none;
+}
+.contact-card-ig:hover{
+  box-shadow:0 20px 56px rgba(124,58,237,0.32);
+  border-color:rgba(124,58,237,0.45);
+}
+
+/* ── Card inner padding ── */
+.contact-card-body{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;
+  padding:2rem 1.6rem 1.6rem;
+  width:100%;
+  flex:1;
+  gap:0;
+}
+
+/* ── Icon wrap ── */
 .contact-icon-wrap{
-  width:60px;height:60px;
-  border-radius:14px;
+  width:56px;height:56px;
+  border-radius:16px;
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
+  margin-bottom:1.1rem;
+}
+.contact-card-gmail .contact-icon-wrap{
+  background:rgba(196,30,14,0.18);
+  box-shadow:0 0 0 1px rgba(196,30,14,0.25), 0 4px 20px rgba(196,30,14,0.2);
+}
+.contact-card-ig .contact-icon-wrap{
+  background:rgba(124,58,237,0.18);
+  box-shadow:0 0 0 1px rgba(124,58,237,0.25), 0 4px 20px rgba(124,58,237,0.2);
+}
+
+/* ── Text info ── */
+.contact-info{
+  display:flex;flex-direction:column;align-items:center;
+  gap:0.25rem;
+  min-width:0;width:100%;
+  flex:1;
+  margin-bottom:1.4rem;
 }
 .contact-platform{
-  font-size:0.72rem;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:0.1em;
-  color:var(--muted);
-  margin-bottom:0.2rem;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.6rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.16em;
+  color:rgba(255,255,255,0.35);
 }
 .contact-handle{
-  font-size:1rem;
-  font-weight:700;
-  color:var(--ink);
-  margin-bottom:0.3rem;
+  font-family:'Fraunces',serif;
+  font-size:0.95rem;font-weight:600;
+  letter-spacing:-0.01em;
+  color:#fff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  max-width:100%;text-align:center;
 }
+.contact-card-gmail .contact-handle{ color:#fff; }
+.contact-card-ig   .contact-handle{ color:#fff; }
+
+/* ── CTA button at bottom ── */
 .contact-cta{
-  font-size:0.78rem;
-  color:var(--blue);
-  font-weight:600;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:0.45rem;
+  width:100%;
+  padding:0.7rem 1rem;
+  border-radius:0 0 24px 24px;
+  font-size:0.75rem;font-weight:700;letter-spacing:0.04em;
+  position:relative;z-index:1;
+  transition:background 0.2s, color 0.2s;
+}
+.contact-card-gmail .contact-cta{
+  background:rgba(196,30,14,0.18);
+  color:rgba(255,160,150,0.9);
+  border-top:1px solid rgba(196,30,14,0.2);
+}
+.contact-card-gmail:hover .contact-cta{
+  background:var(--blue);
+  color:#fff;
+  border-top-color:transparent;
+}
+.contact-card-ig .contact-cta{
+  background:rgba(124,58,237,0.18);
+  color:rgba(196,170,255,0.9);
+  border-top:1px solid rgba(124,58,237,0.2);
+}
+.contact-card-ig:hover .contact-cta{
+  background:#7c3aed;
+  color:#fff;
+  border-top-color:transparent;
 }
 
 
@@ -1979,6 +2392,36 @@ footer{
 </head>
 <body>
 
+<!-- ── NAV ── -->
+<nav>
+  <a class="logo" href="#">
+    <span class="logo-dot"></span>Dewan HIFI FMIPA Unpad
+  </a>
+  <div class="nav-links">
+    <a href="#profil">Profil</a>
+    <a href="#komisi">Komisi</a>
+    <a href="#kpu">KPU</a>
+    <a href="#musang">Musang</a>
+    <a href="#dokumen">Dokumen</a>
+    <a href="#kalender">Kalender</a>
+    <a href="#aspirasi">Aspirasi</a>
+  </div>
+  <button class="nav-hamburger" id="navHam" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── MOBILE DRAWER ── -->
+<div class="nav-mobile" id="navMobile">
+  <a href="#profil"  onclick="closeNav()">Profil Dewan</a>
+  <a href="#komisi"  onclick="closeNav()">Fungsi Komisi</a>
+  <a href="#kpu"     onclick="closeNav()">Tentang KPU</a>
+  <a href="#musang"  onclick="closeNav()">Tentang Musang</a>
+  <a href="#dokumen" onclick="closeNav()">Dokumen Hukum</a>
+  <a href="#kalender" onclick="closeNav()">Kalender</a>
+  <a href="#aspirasi" onclick="closeNav()">Aspirasi</a>
+</div>
+
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-bg-grid"></div>
@@ -2011,12 +2454,38 @@ footer{
 
     <!-- KaDe -->
     <div class="kade-wrap reveal">
-      <div class="ava blue has-photo"><img src="LogoDewan.png" alt="Amjad Faizul Azhim"><span>AM</span></div>
-      <div>
-        <div class="person-role">Ketua Dewan (KaDe)</div>
-        <div class="person-name">Amjad Faizul Azhim </div>
-        <div class="person-nim">NPM 140310240043 · Fisika '24</div>
-        <p class="person-bio">Memimpin seluruh rapat dewan, mengkoordinasikan antar komisi, serta menjadi representasi dewan dalam forum eksternal. Bertanggung jawab penuh atas arah kebijakan dan pengambilan keputusan strategis organisasi.</p>
+      <div class="kade-inner">
+        <div class="kade-left">
+          <div class="kade-ava-ring">
+            <div class="kade-ava">
+              <img src="AnggotaKomisi/Amjad.webp" alt="Amjad Faizul Azhim">
+              <span>AM</span>
+            </div>
+          </div>
+          <div class="kade-ornament">Ketua Dewan</div>
+        </div>
+        <div class="kade-right">
+          <div class="kade-crown">
+            <span class="kade-crown-badge">Ketua Dewan — KaDe</span>
+          </div>
+          <div class="kade-name">Amjad Faizul Azhim</div>
+          <div class="kade-nim">NPM 140310240043 · Fisika '24</div>
+          <p class="kade-bio">Memimpin seluruh rapat dewan, mengkoordinasikan antar komisi, serta menjadi representasi dewan dalam forum eksternal. Bertanggung jawab penuh atas arah kebijakan dan pengambilan keputusan strategis organisasi.</p>
+          <div class="kade-stats">
+            <div class="kade-stat">
+              <div class="kade-stat-val">3</div>
+              <div class="kade-stat-lbl">Komisi</div>
+            </div>
+            <div class="kade-stat">
+              <div class="kade-stat-val">19</div>
+              <div class="kade-stat-lbl">Anggota</div>
+            </div>
+            <div class="kade-stat">
+              <div class="kade-stat-val">2026</div>
+              <div class="kade-stat-lbl">Periode</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -2029,53 +2498,57 @@ footer{
           <div class="k-name">Aspirasi & Advokasi</div>
         </div>
       </div>
+      <!-- Ketua Komisi I -->
+      <div class="ketua-komisi-wrap">
+        <div class="ketua-komisi-card k1-card">
+          <div class="ketua-ava k1-ava"><img src="AnggotaKomisi/Agnia.webp"><span>AG</span></div>
+          <div class="ketua-info">
+            <div class="ketua-badge k1-badge">Ketua Komisi I</div>
+            <div class="ketua-name">Aghnia Afuza Azca</div>
+            <div class="ketua-nim">140310240023 · Fisika '24</div>
+          </div>
+        </div>
+      </div>
+      <!-- Anggota -->
       <div class="members-grid">
         <div class="member-card">
-          <div class="ava sm teal has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">01</span>
+          <div class="mc-ava violet"><img src="AnggotaKomisi/Alea.webp"><span>AL</span></div>
           <div class="mc-info">
-            <div class="person-role">Ketua Komisi I</div>
-            <div class="person-name">Aghnia Afuza Azca </div>
-            <div class="person-nim">140310240023 · Fisika '24</div>
+            <div class="mc-name">Aleasandrina Senjaya Putri</div>
+            <div class="mc-nim">140310240076 · Fisika '24</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm violet has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">02</span>
+          <div class="mc-ava rose"><img src="AnggotaKomisi/Rendy.webp"><span>RP</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Aleasandrina Senjaya Putri </div>
-            <div class="person-nim">140310240076 · Fisika '24</div>
+            <div class="mc-name">Rendy Putra Pratama</div>
+            <div class="mc-nim">140310230037 · Fisika '23</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm rose has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">03</span>
+          <div class="mc-ava amber"><img src="AnggotaKomisi/Rifqi.webp"><span>MR</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Rendy Putra Pratama</div>
-            <div class="person-nim">140310230037 · Fisika '23</div>
+            <div class="mc-name">Muhammad Rifqi Pratama H.</div>
+            <div class="mc-nim">140310230058 · Fisika '23</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm amber has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">04</span>
+          <div class="mc-ava blue"><img src="AnggotaKomisi/Fahri.webp"><span>FF</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Muhammad Rifqi Pratama Hardiansyah</div>
-            <div class="person-nim">140310230058 · Fisika '23</div>
+            <div class="mc-name">Fahri Fadilah</div>
+            <div class="mc-nim">140310250069 · Fisika '25</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm blue has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">05</span>
+          <div class="mc-ava teal"><img src="AnggotaKomisi/Alfi.webp"><span>AN</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Fahri Fadilah</div>
-            <div class="person-nim">140310250069 · Fisika '25</div>
-          </div>
-        </div>
-        <div class="member-card">
-          <div class="ava sm green has-photo"><img src="LogoDewan.png"></div>
-          <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Alfisyahrin Nur Ramadhan</div>
-            <div class="person-nim">140310250076 · Fisika '25</div>
+            <div class="mc-name">Alfisyahrin Nur Ramadhan</div>
+            <div class="mc-nim">140310250076 · Fisika '25</div>
           </div>
         </div>
       </div>
@@ -2090,53 +2563,57 @@ footer{
           <div class="k-name">Pengawasan</div>
         </div>
       </div>
+      <!-- Ketua Komisi II -->
+      <div class="ketua-komisi-wrap">
+        <div class="ketua-komisi-card k2-card">
+          <div class="ketua-ava k2-ava"><img src="AnggotaKomisi/Farel.webp"><span>FA</span></div>
+          <div class="ketua-info">
+            <div class="ketua-badge k2-badge">Ketua Komisi II</div>
+            <div class="ketua-name">Farel Al Faren</div>
+            <div class="ketua-nim">140310240065 · Fisika '24</div>
+          </div>
+        </div>
+      </div>
+      <!-- Anggota -->
       <div class="members-grid">
         <div class="member-card">
-          <div class="ava sm green has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">01</span>
+          <div class="mc-ava blue"><img src="AnggotaKomisi/King.webp"><span>AC</span></div>
           <div class="mc-info">
-            <div class="person-role">Ketua Komisi II</div>
-            <div class="person-name">Farel Al Faren</div>
-            <div class="person-nim">140310240065 · Fisika '24</div>
+            <div class="mc-name">Achmad Syarif Maulana</div>
+            <div class="mc-nim">140310240072 · Fisika '24</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm blue has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">02</span>
+          <div class="mc-ava slate"><img src="AnggotaKomisi/Farrel.webp"><span>FA</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Achmad Syarif Maulana</div>
-            <div class="person-nim">140310240072 · Fisika '24</div>
+            <div class="mc-name">Farrel Aviyo Rahagi</div>
+            <div class="mc-nim">140310230055 · Fisika '23</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm slate has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">03</span>
+          <div class="mc-ava rose"><img src="AnggotaKomisi/Tadha.webp"><span>MT</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Farrel Aviyo Rahagi</div>
-            <div class="person-nim">140310230055 · Fisika</div>
+            <div class="mc-name">Muhamad Tadha Naufal Padhil</div>
+            <div class="mc-nim">140310250035 · Fisika '25</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm rose has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">04</span>
+          <div class="mc-ava amber"><img src="AnggotaKomisi/Azmi.webp"><span>AZ</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Muhamad Tadha Naufal Padhil</div>
-            <div class="person-nim">140310250035 · Fisika '25</div>
+            <div class="mc-name">Azmi Naufal Ridwansyah</div>
+            <div class="mc-nim">140310250038 · Fisika '25</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm amber has photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">05</span>
+          <div class="mc-ava teal"><img src="AnggotaKomisi/Putri.webp"><span>PN</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Azmi Naufal Ridwansyah</div>
-            <div class="person-nim">140310250038 · Fisika '25</div>
-          </div>
-        </div>
-        <div class="member-card">
-          <div class="ava sm teal has photo"><img src="LogoDewan.png"></div>
-          <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Putri Nuurul Qomariyah</div>
-            <div class="person-nim">140310250075 · Fisika '25</div>
+            <div class="mc-name">Putri Nuurul Qomariyah</div>
+            <div class="mc-nim">140310250075 · Fisika '25</div>
           </div>
         </div>
       </div>
@@ -2151,53 +2628,57 @@ footer{
           <div class="k-name">Legislasi</div>
         </div>
       </div>
+      <!-- Ketua Komisi III -->
+      <div class="ketua-komisi-wrap">
+        <div class="ketua-komisi-card k3-card">
+          <div class="ketua-ava k3-ava"><img src="AnggotaKomisi/Dhafina.webp"><span>DH</span></div>
+          <div class="ketua-info">
+            <div class="ketua-badge k3-badge">Ketua Komisi III</div>
+            <div class="ketua-name">Dhafina Hasna Naila Roesmana</div>
+            <div class="ketua-nim">140310240017 · Fisika '24</div>
+          </div>
+        </div>
+      </div>
+      <!-- Anggota -->
       <div class="members-grid">
         <div class="member-card">
-          <div class="ava sm rose has has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">01</span>
+          <div class="mc-ava amber"><img src="AnggotaKomisi/Hafiz.webp"><span>HA</span></div>
           <div class="mc-info">
-            <div class="person-role">Ketua Komisi III</div>
-            <div class="person-name">Dhafina Hasna Naila Roesmana</div>
-            <div class="person-nim">140310240017 · Fisika '24</div>
+            <div class="mc-name">Hafiz Athaariq Pramantya</div>
+            <div class="mc-nim">140310240006 · Fisika '24</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm amber has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">02</span>
+          <div class="mc-ava teal"><img src="AnggotaKomisi/David.webp"><span>DT</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Hafiz Athaariq Pramantya</div>
-            <div class="person-nim">140310240006 · Fisika '24</div>
+            <div class="mc-name">David Triamada</div>
+            <div class="mc-nim">140310230025 · Fisika '23</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm teal has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">03</span>
+          <div class="mc-ava violet"><img src="AnggotaKomisi/Azka.webp"><span>AH</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">David Triamada</div>
-            <div class="person-nim">140310230025 · Fisika '23</div>
+            <div class="mc-name">Azka Hisyami</div>
+            <div class="mc-nim">140310250009 · Fisika '25</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm violet has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">04</span>
+          <div class="mc-ava blue"><img src="AnggotaKomisi/Andhi.webp"><span>AS</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Azka Hisyami</div>
-            <div class="person-nim">140310250009 · Fisika '25</div>
+            <div class="mc-name">Andhi Saputra</div>
+            <div class="mc-nim">140310250054 · Fisika '25</div>
           </div>
         </div>
         <div class="member-card">
-          <div class="ava sm blue has-photo"><img src="LogoDewan.png"></div>
+          <span class="mc-index">05</span>
+          <div class="mc-ava green"><img src="AnggotaKomisi/Indri.webp"><span>IS</span></div>
           <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Andhi Saputra</div>
-            <div class="person-nim">140310250054 · Fisika '25</div>
-          </div>
-        </div>
-        <div class="member-card">
-          <div class="ava sm green has-photo"><img src="LogoDewan.png"></div>
-          <div class="mc-info">
-            <div class="person-role">Anggota</div>
-            <div class="person-name">Indri Sabilatuddiniyah</div>
-            <div class="person-nim">140310250047 · Fisika '47</div>
+            <div class="mc-name">Indri Sabilatuddiniyah</div>
+            <div class="mc-nim">140310250047 · Fisika '25</div>
           </div>
         </div>
       </div>
@@ -2219,21 +2700,21 @@ footer{
       <!-- Tab buttons -->
       <div class="komisi-tab-btns">
         <button class="komisi-tab-btn active" onclick="switchKomisi(0)">
-          <div class="ktb-icon">⚖️</div>
+          <div class="ktb-icon">🤝</div>
           <div class="ktb-label">
             <div class="ktb-num">Komisi I</div>
             <div class="ktb-name">Aspirasi & Advokasi</div>
           </div>
         </button>
         <button class="komisi-tab-btn" onclick="switchKomisi(1)">
-          <div class="ktb-icon">💰</div>
+          <div class="ktb-icon">🔍</div>
           <div class="ktb-label">
             <div class="ktb-num">Komisi II</div>
             <div class="ktb-name">Pengawasan</div>
           </div>
         </button>
         <button class="komisi-tab-btn" onclick="switchKomisi(2)">
-          <div class="ktb-icon">📣</div>
+          <div class="ktb-icon">📜</div>
           <div class="ktb-label">
             <div class="ktb-num">Komisi III</div>
             <div class="ktb-name">Legislasi</div>
@@ -2295,8 +2776,8 @@ footer{
           <div class="komisi-task-item"><span class="komisi-task-num">01</span><span class="komisi-task-text">Melakukan sosialisasi hasil Musyawarah Anggota 2024 kepada Anggota Himpunan</span></div>
           <div class="komisi-task-item"><span class="komisi-task-num">02</span><span class="komisi-task-text">Melakukan Pencerdasan Regulasi kepada Anggota Himpunan</span></div>
           <div class="komisi-task-item"><span class="komisi-task-num">03</span><span class="komisi-task-text">Melakukan Pengkajian Regulasi HIFI</span></div>
-          <div class="komisi-task-item"><span class="komisi-task-num">04</span><span class="komisi-task-text">Membentuk dan mengadakan Pembekalan kepada Panitia Komisi Pemilihan Umum HIFI 2025</span></div>
-          <div class="komisi-task-item"><span class="komisi-task-num">05</span><span class="komisi-task-text">Membentuk dan mengadakan Pembekalan serta Simulasi Pelaksanaan Musang kepada Panitia Musyawarah Anggota HIFI 2025</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">04</span><span class="komisi-task-text">Membentuk dan mengadakan Pembekalan kepada Panitia Komisi Pemilihan Umum HIFI 2026</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">05</span><span class="komisi-task-text">Membentuk dan mengadakan Pembekalan serta Simulasi Pelaksanaan Musang kepada Panitia Musyawarah Anggota HIFI 2026</span></div>
         </div>
       </div>
 
@@ -2895,35 +3376,8 @@ footer{
            https://calendar.google.com/calendar/embed?src=CALENDAR_ID%40group.calendar.google.com&ctz=Asia%2FJakarta&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&mode=MONTH
            ═══════════════════════════════════════════════════════════════════ -->
       <div class="kalender-iframe-box" id="kalenderBox">
- 
-        <!-- PLACEHOLDER — tampil saat src belum dikonfigurasi -->
-        <div class="kalender-placeholder" id="kalenderPlaceholder">
-          <div class="kalender-placeholder-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C41E0E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
-          </div>
-          <h3>Hubungkan Google Calendar</h3>
-          <p>Kalender resmi Dewan HIFI belum dikonfigurasi. Ikuti langkah berikut untuk menampilkan jadwal kegiatan secara otomatis.</p>
-          <div class="kalender-setup-steps">
-            <div class="kalender-step">
-              <div class="ks-num">01</div>
-              <div class="ks-text">Buka Google Calendar dengan akun resmi Dewan</div>
-            </div>
-            <div class="kalender-step">
-              <div class="ks-num">02</div>
-              <div class="ks-text">Settings → "Integrate calendar" → salin URL embed</div>
-            </div>
-            <div class="kalender-step">
-              <div class="ks-num">03</div>
-              <div class="ks-text">Tempel URL ke atribut <code style="background:var(--bg2);padding:1px 5px;border-radius:4px;font-size:0.7rem;">src</code> iframe di file HTML</div>
-            </div>
-          </div>
-        </div>
- 
-       
         <iframe
-          src=https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FJakarta&showPrint=0&src=ZGV3YW5oaWZpLnVucGFkQGdtYWlsLmNvbQ&src=OGZmNmUzMDM3ZWM5YjI2MGQ0YjBjM2M5OGMwOWQxOTRjMWRkODZhNjFlZDZiYmNkYWE4OGNiMGVlMWZjNDRiZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NTc2NDVhMDc2Y2EwZWY1MWZhMDEwZjA3MDllYzBlZTI0ODQwMjc2YWQ4NzI2NWQ2NmEzOTA1MjJkMTU0YzcwMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZWU2YmIwMTRmZDkxZTdlNzJjMmY5YTcyYTJhODBmYWE4MjFlNDYyZTVmZTcyZWY0MDBlOWMzOGZlNmEyMDlhYkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uaW5kb25lc2lhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=aGlmaXVucGFkMjAyNUBnbWFpbC5jb20&color=%238e24aa&color=%237986cb&color=%23a79b8e&color=%238e24aa&color=%230b8043&color=%23c0ca33" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>"
+          src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FJakarta&showPrint=0&src=ZGV3YW5oaWZpLnVucGFkQGdtYWlsLmNvbQ&src=OGZmNmUzMDM3ZWM5YjI2MGQ0YjBjM2M5OGMwOWQxOTRjMWRkODZhNjFlZDZiYmNkYWE4OGNiMGVlMWZjNDRiZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NTc2NDVhMDc2Y2EwZWY1MWZhMDEwZjA3MDllYzBlZTI0ODQwMjc2YWQ4NzI2NWQ2NmEzOTA1MjJkMTU0YzcwMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZWU2YmIwMTRmZDkxZTdlNzJjMmY5YTcyYTJhODBmYWE4MjFlNDYyZTVmZTcyZWY0MDBlOWMzOGZlNmEyMDlhYkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uaW5kb25lc2lhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=aGlmaXVucGFkMjAyNUBnbWFpbC5jb20&color=%238e24aa&color=%237986cb&color=%23a79b8e&color=%238e24aa&color=%230b8043&color=%23c0ca33"
           style="border:0;"
           width="100%"
           height="100%"
@@ -2966,33 +3420,43 @@ footer{
     <div class="contact-grid reveal">
 
       <!-- Gmail -->
-      <a href="/cdn-cgi/l/email-protection#7d19180a1c1315141b143d1a101c1411531e1210" class="contact-card" target="_blank">
-        <div class="contact-icon-wrap" style="background:#fff0ee;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#C41E0E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <polyline points="22,6 12,13 2,6" stroke="#C41E0E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+      <a href="mailto:dewanhifi.unpad@gmail.com" class="contact-card contact-card-gmail" target="_blank">
+        <div class="contact-card-body">
+          <div class="contact-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#ff6b5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="22,6 12,13 2,6" stroke="#ff6b5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <div class="contact-platform">Gmail</div>
+            <div class="contact-handle">dewanhifi.unpad@gmail.com</div>
+          </div>
         </div>
-        <div class="contact-info">
-          <div class="contact-platform">Gmail</div>
-          <div class="contact-handle"><span class="__cf_email__" data-cfemail="0662637167686e6f606f46616b676f6a2865696b">[email&#160;protected]</span></div>
-          <div class="contact-cta">Kirim Email →</div>
+        <div class="contact-cta">
+          Kirim Email
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
         </div>
       </a>
 
       <!-- Instagram -->
-      <a href="https://instagram.com/dewanhifi" class="contact-card" target="_blank">
-        <div class="contact-icon-wrap" style="background:#f3eeff;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="12" cy="12" r="4" stroke="#7c3aed" stroke-width="1.8"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="#7c3aed"/>
-          </svg>
+      <a href="https://instagram.com/dewan.hifiunpad" class="contact-card contact-card-ig" target="_blank">
+        <div class="contact-card-body">
+          <div class="contact-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="#c4b5fd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="12" cy="12" r="4" stroke="#c4b5fd" stroke-width="1.8"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="#c4b5fd"/>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <div class="contact-platform">Instagram</div>
+            <div class="contact-handle">@dewan.hifiunpad</div>
+          </div>
         </div>
-        <div class="contact-info">
-          <div class="contact-platform">Instagram</div>
-          <div class="contact-handle">@dewanhifi</div>
-          <div class="contact-cta">Lihat Profil →</div>
+        <div class="contact-cta">
+          Lihat Profil
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
         </div>
       </a>
 
@@ -3006,8 +3470,9 @@ footer{
 
 <!-- ── FOOTER ── -->
 <footer>
-  <div class="foot-logo">Dewan HIFI FMIPA Unpad</div>
-  <div class="foot-copy">© 2025 Dewan HIFI FMIPA Unpad · Mengemban amanah, melayani anggota</div>
+  <center>
+    <div class="foot-copy">© 2026 Dewan HIFI FMIPA Unpad</div>
+  </center>
 </footer>
 
 <!-- ── FLOATING ASPIRASI BUTTON ── -->
@@ -3017,6 +3482,25 @@ footer{
 </a>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Nav mobile toggle
+  function toggleNav(){
+    const m=document.getElementById('navMobile');
+    const h=document.getElementById('navHam');
+    const open=m.classList.toggle('open');
+    h.classList.toggle('open',open);
+  }
+  function closeNav(){
+    document.getElementById('navMobile').classList.remove('open');
+    document.getElementById('navHam').classList.remove('open');
+  }
+  // Close drawer when clicking outside
+  document.addEventListener('click',function(e){
+    const m=document.getElementById('navMobile');
+    const h=document.getElementById('navHam');
+    if(m.classList.contains('open')&&!m.contains(e.target)&&!h.contains(e.target)){
+      closeNav();
+    }
+  });
   // Komisi tab switcher
   function switchKomisi(idx) {
     document.querySelectorAll('.komisi-tab-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
@@ -3051,7 +3535,7 @@ footer{
       if (e.isIntersecting) {
         links.forEach(l => { l.style.color=''; l.style.background=''; });
         const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-        if (a) { a.style.color = 'var(--blue)'; a.style.background = 'var(--blue-lt)'; }
+        if (a) { a.style.color = '#f5f0eb'; a.style.background = 'rgba(255,255,255,0.08)'; }
       }
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
