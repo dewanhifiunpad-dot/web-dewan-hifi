@@ -790,7 +790,7 @@ hr.dim{border:none;border-top:1px solid var(--line);margin:3rem 0;}
   position: relative;
 }
 
-/* Connector line */
+/* Horizontal connector line — desktop */
 .kpu-timeline-track::before {
   content: '';
   position: absolute;
@@ -836,7 +836,7 @@ hr.dim{border:none;border-top:1px solid var(--line);margin:3rem 0;}
   height: 18px;
   background: rgba(255, 207, 204, 0.15);
   border-color: #ffcfcc;
-  margin-bottom: calc(1.4rem - 3px); /* compensate for size difference */
+  margin-bottom: calc(1.4rem - 3px);
 }
 
 .kpu-tl-dot--end::after {
@@ -883,37 +883,65 @@ hr.dim{border:none;border-top:1px solid var(--line);margin:3rem 0;}
 
 /* ─── MOBILE ─── */
 @media (max-width: 900px) {
+
+  /* Switch to single column with left padding for the line */
   .kpu-timeline-track {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-left: 1rem;
   }
 
+  /* Vertical connector line — one continuous line on the left */
   .kpu-timeline-track::before {
-    display: none;
+    top: 6px;
+    bottom: 6px;
+    left: calc(1rem - 1px);      /* centers on the 12px dot: 1rem padding ≈ 16px, dot left: -6px → 16-6=10px center, line at 5px */
+    right: auto;
+    width: 1px;
+    height: auto;
+    background: rgba(255, 207, 204, 0.2);
   }
 
   .kpu-tl-item {
+    flex-direction: row;
     align-items: flex-start;
     text-align: left;
-    padding: 0 0 0 2rem;
-    border-left: 1px solid rgba(255, 207, 204, 0.15);
+    padding: 0 0 1.75rem 1.75rem;
+    position: relative;
   }
 
+  .kpu-tl-item:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Reset column styles, use absolute positioning on the line */
   .kpu-tl-dot {
     position: absolute;
-    left: -6px;
+    left: -6px;     /* half of 12px — sits centered on the 1px line */
     top: 0;
     margin-bottom: 0;
   }
 
+  /* End dot: larger so offset shifts left and down to stay centered */
   .kpu-tl-dot--end {
-    left: -9px;
+    left: -9px;     /* half of 18px */
+    top: -3px;      /* compensate for height difference (18-12)/2 */
   }
 }
 
-@media (max-width: 540px) {
-  .kpu-timeline-track {
-    grid-template-columns: 1fr;
+/* ─── SMALL MOBILE ─── */
+@media (max-width: 480px) {
+  .kpu-tl-item {
+    padding-bottom: 1.5rem;
+  }
+
+  .kpu-tl-title {
+    font-size: 0.95rem;
+  }
+
+  .kpu-tl-desc {
+    font-size: 0.78rem;
   }
 }
 
