@@ -705,6 +705,399 @@ hr.dim{border:none;border-top:1px solid var(--line);margin:3rem 0;}
 }
 .kpu-stat-label{font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.5;}
 
+.kpu-right-col{
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+}
+
+/* ─── KPU PASAL PLAIN ─── */
+.kpu-pasal-plain h3{
+  font-family:'Fraunces',serif;
+  font-size:1rem;font-weight:600;
+  color:#ffcfcc;
+  margin-bottom:0.9rem;
+}
+.kpu-pasal-list{
+  list-style:none;
+  padding:0;margin:0;
+  display:flex;flex-direction:column;
+  gap:0;
+}
+.kpu-pasal-list li{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:0.85rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.kpu-pasal-list li:last-child{
+  border-bottom:none;
+  padding-bottom:0;
+}
+.kpu-pasal-num{
+  font-family:'Fraunces',serif;
+  font-size:1.1rem;font-weight:300;
+  color:rgba(255,207,204,0.35);
+  line-height:1;
+  flex-shrink:0;
+  width:18px;
+  margin-top:0.15rem;
+}
+.kpu-pasal-text{
+  font-size:0.87rem;
+  color:rgba(255,255,255,0.55);
+  line-height:1.8;
+}
+.kpu-pasal-text strong{
+  color:rgba(255,255,255,0.85);
+  font-weight:600;
+}
+
+.kpu-sub-list{
+  list-style:none;
+  padding:0;margin:0.6rem 0 0 0;
+  display:flex;flex-direction:column;gap:0.45rem;
+}
+.kpu-sub-list li{
+  display:flex;align-items:flex-start;gap:0.65rem;
+  padding:0 !important;
+  border-bottom:none !important;
+}
+.kpu-sub-alpha{
+  font-size:0.72rem;font-weight:700;
+  color:rgba(255,207,204,0.45);
+  flex-shrink:0;
+  width:14px;
+  margin-top:0.05rem;
+  font-family:'Fraunces',serif;
+  font-style:italic;
+}
+
+/* ─── KPU TIMELINE ─── */
+.kpu-timeline {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.kpu-timeline-header {
+  margin-bottom: 3rem;
+}
+
+.kpu-timeline-track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+/* Connector line */
+.kpu-timeline-track::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  height: 1px;
+  background: rgba(255, 207, 204, 0.2);
+}
+
+/* ─── ITEM ─── */
+.kpu-tl-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.5rem;
+  position: relative;
+  text-align: center;
+}
+
+/* ─── DOT ─── */
+.kpu-tl-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid rgba(255, 207, 204, 0.4);
+  flex-shrink: 0;
+  margin-bottom: 1.4rem;
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.kpu-tl-item:hover .kpu-tl-dot {
+  border-color: #ffcfcc;
+  background: rgba(255, 207, 204, 0.15);
+}
+
+/* End dot — filled ring */
+.kpu-tl-dot--end {
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 207, 204, 0.15);
+  border-color: #ffcfcc;
+  margin-bottom: calc(1.4rem - 3px); /* compensate for size difference */
+}
+
+.kpu-tl-dot--end::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffcfcc;
+}
+
+/* ─── CONTENT ─── */
+.kpu-tl-phase {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 207, 204, 0.35);
+  margin-bottom: 0.4rem;
+}
+
+.kpu-tl-title {
+  font-family: 'Fraunces', serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.4rem;
+  line-height: 1.2;
+}
+
+.kpu-tl-desc {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.65;
+  transition: color 0.2s;
+}
+
+.kpu-tl-item:hover .kpu-tl-desc {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ─── MOBILE ─── */
+@media (max-width: 900px) {
+  .kpu-timeline-track {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1rem;
+  }
+
+  .kpu-timeline-track::before {
+    display: none;
+  }
+
+  .kpu-tl-item {
+    align-items: flex-start;
+    text-align: left;
+    padding: 0 0 0 2rem;
+    border-left: 1px solid rgba(255, 207, 204, 0.15);
+  }
+
+  .kpu-tl-dot {
+    position: absolute;
+    left: -6px;
+    top: 0;
+    margin-bottom: 0;
+  }
+
+  .kpu-tl-dot--end {
+    left: -9px;
+  }
+}
+
+@media (max-width: 540px) {
+  .kpu-timeline-track {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── TUGAS DAN WEWENANG KPU ─── */
+.kpu-tugas-list{
+  display:flex;flex-direction:column;
+  gap:0;
+  margin-bottom:0.5rem;
+}
+.kpu-tugas-item{
+  display:flex;align-items:flex-start;gap:0.85rem;
+  padding:0.7rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  font-size:0.85rem;
+  color:rgba(255,255,255,0.55);
+  line-height:1.7;
+  transition:color 0.2s;
+}
+.kpu-tugas-item:last-child{border-bottom:none;}
+.kpu-tugas-item:hover{color:rgba(255,255,255,0.8);}
+.kpu-tugas-num{
+  font-family:'Fraunces',serif;
+  font-size:0.72rem;font-weight:600;
+  color:rgba(255,207,204,0.45);
+  background:rgba(255,207,204,0.08);
+  border-radius:50%;
+  width:20px;height:20px;min-width:20px;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:0.22rem;
+  flex-shrink:0;
+}
+
+/* ─── SYARAT ANGGOTA KPU ─── */
+.syarat-block{
+  margin-top:2rem;
+}
+.syarat-title{
+  font-family:'Fraunces',serif;
+  font-size:1rem;font-weight:600;
+  color:#ffcfcc;
+  margin-bottom:1rem;
+}
+.syarat-list{
+  display:flex;flex-direction:column;
+  gap:1px;
+  background:rgba(255,255,255,0.07);
+  border-radius:14px;
+  overflow:hidden;
+}
+.syarat-item{
+  display:flex;align-items:flex-start;gap:1.1rem;
+  padding:1.1rem 1.3rem;
+  background:rgba(255,255,255,0.03);
+  transition:background 0.2s;
+}
+.syarat-item:hover{background:rgba(255,255,255,0.07);}
+.syarat-item--hl{
+  background:rgba(255,207,204,0.07);
+}
+.syarat-item--hl:hover{background:rgba(255,207,204,0.12);}
+.syarat-num{
+  font-family:'Fraunces',serif;
+  font-size:0.75rem;font-weight:600;
+  color:rgba(255,207,204,0.5);
+  background:rgba(255,207,204,0.1);
+  border-radius:50%;
+  width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:0.1rem;
+  letter-spacing:0;
+}
+.syarat-item--hl .syarat-num{
+  color:#ffcfcc;
+  background:rgba(255,207,204,0.18);
+}
+.syarat-body{flex:1;}
+.syarat-text{
+  font-size:0.83rem;
+  color:rgba(255,255,255,0.55);
+  line-height:1.7;
+  margin-bottom:0.2rem;
+}
+.syarat-item--hl .syarat-text{color:rgba(255,255,255,0.6);}
+.syarat-tag{
+  display:inline-block;
+  font-size:0.62rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,207,204,0.5);
+  background:rgba(255,207,204,0.08);
+  padding:0.15rem 0.55rem;
+  border-radius:99px;
+  margin-top:0.35rem;
+}
+.syarat-bignum{
+  font-family:'Fraunces',serif;
+  font-size:1.8rem;font-weight:300;
+  color:#ffcfcc;
+  line-height:1.1;
+  margin-top:0.15rem;
+}
+.syarat-bignum span{
+  font-size:0.8rem;font-weight:500;
+  color:rgba(255,207,204,0.55);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  margin-left:0.3rem;
+}
+.syarat-sub-grid{
+  display:flex;flex-direction:column;gap:0.5rem;
+  margin-top:0.55rem;
+}
+.syarat-sub-item{
+  display:flex;align-items:flex-start;gap:0.6rem;
+  font-size:0.8rem;
+  color:rgba(255,255,255,0.5);
+  line-height:1.6;
+}
+.syarat-sub-icon{
+  font-size:0.85rem;
+  flex-shrink:0;
+  margin-top:0.05rem;
+}
+
+.asas-block{
+  margin-bottom:2rem;
+}
+.asas-badge-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,207,204,0.2);
+  border-radius:16px;
+  padding:1.5rem 1.6rem;
+  position:relative;
+  overflow:hidden;
+}
+.asas-badge-card::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,207,204,0.07) 0%,transparent 60%);
+  pointer-events:none;
+}
+.asas-badge-eyebrow{
+  display:inline-flex;align-items:center;gap:0.45rem;
+  font-size:0.62rem;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:#ffcfcc;
+  margin-bottom:0.9rem;
+  opacity:0.8;
+}
+.asas-quote{
+  font-size:0.84rem;
+  color:rgba(255,255,255,0.6);
+  line-height:1.75;
+  margin-bottom:1.1rem;
+  font-style:italic;
+}
+.asas-chips{
+  display:flex;flex-wrap:wrap;gap:0.45rem;
+}
+.asas-chip{
+  display:inline-flex;align-items:center;
+  padding:0.3rem 0.8rem;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:99px;
+  font-size:0.72rem;font-weight:700;
+  color:rgba(255,255,255,0.65);
+  letter-spacing:0.04em;
+  transition:background 0.2s,border-color 0.2s,color 0.2s;
+}
+.asas-chip:hover{
+  background:rgba(255,207,204,0.15);
+  border-color:rgba(255,207,204,0.45);
+  color:#ffcfcc;
+}
+.asas-chip--gold{
+  background:rgba(255,207,100,0.1);
+  border-color:rgba(255,207,100,0.3);
+  color:rgba(255,220,140,0.85);
+}
+.asas-chip--gold:hover{
+  background:rgba(255,207,100,0.2);
+  border-color:rgba(255,207,100,0.55);
+  color:#ffd98c;
+}
+
 /* ─── MUSANG ─── */
 #musang{background:var(--surface);}
 
@@ -2634,7 +3027,7 @@ footer{
           <div class="ketua-ava k3-ava"><img src="AnggotaKomisi/Dhafina.webp"><span>DH</span></div>
           <div class="ketua-info">
             <div class="ketua-badge k3-badge">Ketua Komisi III</div>
-            <div class="ketua-name">Dhafina Hasna Naila Roesmana</div>
+            <div class="ketua-name">Dhafina Hasna Nailah Roesmana</div>
             <div class="ketua-nim">140310240017 · Fisika '24</div>
           </div>
         </div>
@@ -2725,7 +3118,7 @@ footer{
       <!-- Panel I -->
       <div class="komisi-tab-panel active" id="kpanel-0">
         <div class="komisi-panel-header">
-          <span class="komisi-panel-icon">⚖️</span>
+          <span class="komisi-panel-icon">🤝</span>
           <div>
             <div class="komisi-panel-title">Komisi I — Aspirasi & Advokasi</div>
             <div class="komisi-panel-sub">6 tugas pokok</div>
@@ -2744,7 +3137,7 @@ footer{
       <!-- Panel II -->
       <div class="komisi-tab-panel" id="kpanel-1">
         <div class="komisi-panel-header">
-          <span class="komisi-panel-icon">💰</span>
+          <span class="komisi-panel-icon">🔍</span>
           <div>
             <div class="komisi-panel-title">Komisi II — Pengawasan</div>
             <div class="komisi-panel-sub">9 tugas pokok</div>
@@ -2766,14 +3159,14 @@ footer{
       <!-- Panel III -->
       <div class="komisi-tab-panel" id="kpanel-2">
         <div class="komisi-panel-header">
-          <span class="komisi-panel-icon">📣</span>
+          <span class="komisi-panel-icon">📜</span>
           <div>
             <div class="komisi-panel-title">Komisi III — Legislasi</div>
             <div class="komisi-panel-sub">5 tugas pokok</div>
           </div>
         </div>
         <div class="komisi-task-list">
-          <div class="komisi-task-item"><span class="komisi-task-num">01</span><span class="komisi-task-text">Melakukan sosialisasi hasil Musyawarah Anggota kepada Warga Himpunan</span></div>
+          <div class="komisi-task-item"><span class="komisi-task-num">01</span><span class="komisi-task-text">Melakukan sosialisasi hasil Musyawarah Anggota 2024 kepada Anggota Himpunan</span></div>
           <div class="komisi-task-item"><span class="komisi-task-num">02</span><span class="komisi-task-text">Melakukan Pencerdasan Regulasi kepada Anggota Himpunan</span></div>
           <div class="komisi-task-item"><span class="komisi-task-num">03</span><span class="komisi-task-text">Melakukan Pengkajian Regulasi HIFI</span></div>
           <div class="komisi-task-item"><span class="komisi-task-num">04</span><span class="komisi-task-text">Membentuk dan mengadakan Pembekalan kepada Panitia Komisi Pemilihan Umum HIFI 2026</span></div>
@@ -2798,32 +3191,211 @@ footer{
 
     <div class="kpu-grid reveal">
       <div class="kpu-text">
-        <h3>Apa itu KPU?</h3>
-        <p>Komisi Pemilihan Umum (KPU) adalah lembaga ad hoc yang dibentuk oleh Dewan untuk menyelenggarakan proses pemilihan umum dalam lingkup organisasi secara independen dan tidak memihak kandidat manapun.</p>
-        <h3>Wewenang KPU</h3>
-        <p>KPU berwenang menetapkan jadwal dan tata tertib UUKADER, memverifikasi kandidat, memfasilitasi kampanye yang sehat, melaksanakan pemungutan suara, serta mengumumkan hasil penghitungan secara resmi.</p>
-        <h3>Hubungan dengan Dewan</h3>
-        <p>KPU dibentuk berdasarkan keputusan Dewan dan berkewajiban menyampaikan laporan penyelenggaraan pemilihan kepada Dewan setelah seluruh rangkaian kegiatan selesai.</p>
-        <h3>Masa Kerja</h3>
-        <p>Masa kerja KPU terbatas pada periode penyelenggaraan pemilihan — mulai dari tahap persiapan hingga penetapan hasil akhir dan selesainya sengketa (jika ada).</p>
+        <!-- Asas Pemilu -->
+        <div class="asas-block">
+          <div class="asas-badge-card">
+            <div class="asas-badge-eyebrow">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Asas Pemilu
+            </div>
+            <p class="asas-quote">Pemilu HIFI FMIPA Unpad dilaksanakan secara efektif dan efisien berdasarkan asas langsung, umum, bebas, rahasia, jujur, adil, dan demokratis.</p>
+            <div class="asas-chips">
+              <span class="asas-chip">Langsung</span>
+              <span class="asas-chip">Umum</span>
+              <span class="asas-chip">Bebas</span>
+              <span class="asas-chip">Rahasia</span>
+              <span class="asas-chip">Jujur</span>
+              <span class="asas-chip">Adil</span>
+              <span class="asas-chip asas-chip--gold">Demokratis</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ketentuan KPU (pindah dari kanan) -->
+        <div class="kpu-pasal-plain">
+          <h3>Ketentuan KPU</h3>
+          <ol class="kpu-pasal-list">
+            <li>
+              <span class="kpu-pasal-num">1</span>
+              <span class="kpu-pasal-text">Pemilu HIFI FMIPA Unpad diselenggarakan oleh KPU yang bersifat <strong>mandiri</strong>, <strong>independen</strong>, dan <strong>sementara</strong>.</span>
+            </li>
+            <li>
+              <span class="kpu-pasal-num">2</span>
+              <span class="kpu-pasal-text">KPU dibentuk oleh <strong>DE HIFI FMIPA Unpad</strong>.</span>
+            </li>
+            <li>
+              <span class="kpu-pasal-num">3</span>
+              <span class="kpu-pasal-text">KPU bertanggung jawab atas penyelenggaraan <strong>Pemilu HIFI FMIPA Unpad</strong>.</span>
+            </li>
+            <li>
+              <span class="kpu-pasal-num">4</span>
+              <span class="kpu-pasal-text">KPU bertanggung jawab kepada anggota himpunan melalui <strong>MUSANG HIFI FMIPA Unpad</strong>.</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Syarat Anggota KPU (pindah dari kanan) -->
+        <div class="syarat-block">
+          <h3 class="syarat-title">Syarat Anggota KPU</h3>
+          <div class="syarat-list">
+
+            <div class="syarat-item">
+              <div class="syarat-num">1</div>
+              <div class="syarat-body">
+                <div class="syarat-text">Anggota KPU adalah anggota penuh HIFI FMIPA Unpad.</div>
+                <span class="syarat-tag">Keanggotaan</span>
+              </div>
+            </div>
+
+            <div class="syarat-item syarat-item--hl">
+              <div class="syarat-num">2</div>
+              <div class="syarat-body">
+                <div class="syarat-text">Anggota KPU berjumlah minimal</div>
+                <div class="syarat-bignum">180 <span>orang</span></div>
+              </div>
+            </div>
+
+            <div class="syarat-item syarat-item--hl">
+              <div class="syarat-num">3</div>
+              <div class="syarat-body">
+                <div class="syarat-text">Anggota KPU terdiri dari</div>
+                <div class="syarat-bignum">3 <span>angkatan termuda</span></div>
+              </div>
+            </div>
+
+            <div class="syarat-item">
+              <div class="syarat-num">4</div>
+              <div class="syarat-body">
+                <div class="syarat-text">Syarat umum menjadi anggota KPU:</div>
+                <div class="syarat-sub-grid">
+                  <div class="syarat-sub-item">
+                    <span class="syarat-sub-icon">🕌</span>
+                    <span>Beriman kepada Tuhan Yang Maha Esa.</span>
+                  </div>
+                  <div class="syarat-sub-item">
+                    <span class="syarat-sub-icon">⚖️</span>
+                    <span>Mempunyai integritas, pribadi yang kuat, jujur, dan adil.</span>
+                  </div>
+                  <div class="syarat-sub-item">
+                    <span class="syarat-sub-icon">🤝</span>
+                    <span>Netral.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
-      <div class="kpu-cards">
-        <div class="kpu-stat">
-          <div class="kpu-stat-val">3</div>
-          <div class="kpu-stat-label">Tahapan utama penyelenggaraan UUKADER — Persiapan, Pelaksanaan, Penetapan</div>
+
+      <div class="kpu-right-col">
+
+        <!-- Apa itu KPU? (pindah dari kiri) -->
+        <h3 style="font-family:'Fraunces',serif;font-size:1rem;font-weight:600;color:#ffcfcc;margin-bottom:0.4rem;">Apa itu KPU?</h3>
+        <p style="font-size:0.87rem;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:1.8rem;">Komisi Pemilihan Umum (KPU) adalah lembaga ad hoc yang dibentuk oleh Dewan untuk menyelenggarakan proses pemilihan umum dalam lingkup organisasi secara independen dan tidak memihak kandidat manapun.</p>
+
+        <!-- Tugas dan Wewenang KPU (pindah dari kiri) -->
+        <h3 style="font-family:'Fraunces',serif;font-size:1rem;font-weight:600;color:#ffcfcc;margin-bottom:0.9rem;">Tugas dan Wewenang KPU</h3>
+        <div class="kpu-tugas-list">
+          <div class="kpu-tugas-item">
+            <span class="kpu-tugas-num">1</span>
+            <span>Merencanakan penyelenggaraan Pemilu HIFI FMIPA Unpad bersama DE HIFI FMIPA Unpad.</span>
+          </div>
+          <div class="kpu-tugas-item">
+            <span class="kpu-tugas-num">2</span>
+            <span>Mengkoordinasikan, menyelenggarakan, dan mengendalikan alur beserta semua tahapan pelaksanaan Pemilu HIFI FMIPA Unpad.</span>
+          </div>
+          <div class="kpu-tugas-item">
+            <span class="kpu-tugas-num">3</span>
+            <span>Menyeleksi dan menetapkan peserta Pemilu HIFI FMIPA Unpad.</span>
+          </div>
+          <div class="kpu-tugas-item">
+            <span class="kpu-tugas-num">4</span>
+            <span>Menetapkan waktu, tanggal, tata cara kampanye, dan pemungutan suara.</span>
+          </div>
+          <div class="kpu-tugas-item">
+            <span class="kpu-tugas-num">5</span>
+            <span>Melaksanakan sosialisasi penyelenggaraan Pemilu dan atau hal yang berkaitan dengan tugas dan wewenang KPU HIFI FMIPA Unpad kepada anggota Himpunan.</span>
+          </div>
+          <div class="kpu-tugas-item">
+            <span class="kpu-tugas-num">6</span>
+            <span>Melakukan evaluasi dan pelaporan pelaksanaan Pemilu HIFI FMIPA Unpad.</span>
+          </div>
+          <div class="kpu-tugas-item">
+            <span class="kpu-tugas-num">7</span>
+            <span>Melakukan tugas dan wewenang lain yang menunjang terlaksananya Pemilu HIFI FMIPA Unpad sesuai dengan peraturan yang berlaku.</span>
+          </div>
         </div>
-        <div class="kpu-stat">
-          <div class="kpu-stat-val">5</div>
-          <div class="kpu-stat-label">Anggota KPU yang ditugaskan per periode kepengurusan</div>
+
+        <h3 style="font-family:'Fraunces',serif;font-size:1rem;font-weight:600;color:#ffcfcc;margin-bottom:0.4rem;margin-top:1.8rem;">Hubungan dengan Dewan</h3>
+        <p style="font-size:0.87rem;color:rgba(255,255,255,0.55);line-height:1.8;">Panitia KPU HIFI FMIPA Unpad diawasi oleh DE HIFI FMIPA Unpad dan wajib melaporkan setiap rencana dan atau program Pemilu kepada DE HIFI FMIPA Unpad dalam waktu yang disepakati bersama.</p>
+
+      </div>
+    </div>
+
+    <!-- Timeline Tahapan Pemilu -->
+    <div class="kpu-timeline reveal">
+      <div class="kpu-timeline-header">
+        <div class="s-eyebrow" style="color:#ffcfcc;">Alur Penyelenggaraan</div>
+        <h3 style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:300;color:#fff;letter-spacing:-0.01em;margin-top:0.3rem;">Tahapan <em style="font-style:italic;color:rgba(255,255,255,0.4);">Pemilu</em> HIFI</h3>
+      </div>
+      <div class="kpu-timeline-track">
+
+        <div class="kpu-tl-item">
+          <div class="kpu-tl-dot"></div>
+          <div class="kpu-tl-content">
+            <div class="kpu-tl-phase">Fase 01</div>
+            <div class="kpu-tl-title">Persiapan</div>
+            <div class="kpu-tl-desc">Pembentukan KPU oleh DE, penetapan tata tertib, dan sosialisasi penyelenggaraan Pemilu kepada anggota himpunan.</div>
+          </div>
         </div>
-        <div class="kpu-stat">
-          <div class="kpu-stat-val">100%</div>
-          <div class="kpu-stat-label">Independensi — tidak memihak kandidat manapun</div>
+
+        <div class="kpu-tl-item">
+          <div class="kpu-tl-dot"></div>
+          <div class="kpu-tl-content">
+            <div class="kpu-tl-phase">Fase 02</div>
+            <div class="kpu-tl-title">Pendaftaran & Seleksi</div>
+            <div class="kpu-tl-desc">Penjaringan, verifikasi, dan penetapan peserta Pemilu oleh KPU secara independen dan tidak memihak.</div>
+          </div>
         </div>
-        <div class="kpu-stat">
-          <div class="kpu-stat-val">1×</div>
-          <div class="kpu-stat-label">Penyelenggaraan per periode kepengurusan organisasi</div>
+
+        <div class="kpu-tl-item">
+          <div class="kpu-tl-dot"></div>
+          <div class="kpu-tl-content">
+            <div class="kpu-tl-phase">Fase 03</div>
+            <div class="kpu-tl-title">Kampanye</div>
+            <div class="kpu-tl-desc">Pelaksanaan kampanye yang sehat dan tertib sesuai waktu dan tata cara yang telah ditetapkan KPU.</div>
+          </div>
         </div>
+
+        <div class="kpu-tl-item">
+          <div class="kpu-tl-dot"></div>
+          <div class="kpu-tl-content">
+            <div class="kpu-tl-phase">Fase 04</div>
+            <div class="kpu-tl-title">Pemungutan Suara</div>
+            <div class="kpu-tl-desc">Pelaksanaan pemungutan suara secara langsung, umum, bebas, rahasia, jujur, adil, dan demokratis.</div>
+          </div>
+        </div>
+
+        <div class="kpu-tl-item">
+          <div class="kpu-tl-dot"></div>
+          <div class="kpu-tl-content">
+            <div class="kpu-tl-phase">Fase 05</div>
+            <div class="kpu-tl-title">Penghitungan & Penetapan</div>
+            <div class="kpu-tl-desc">Penghitungan suara secara terbuka dan penetapan hasil akhir Pemilu secara resmi oleh KPU.</div>
+          </div>
+        </div>
+
+        <div class="kpu-tl-item">
+          <div class="kpu-tl-dot kpu-tl-dot--end"></div>
+          <div class="kpu-tl-content">
+            <div class="kpu-tl-phase">Fase 06</div>
+            <div class="kpu-tl-title">Pelaporan</div>
+            <div class="kpu-tl-desc">Evaluasi dan penyampaian laporan pelaksanaan Pemilu kepada DE HIFI FMIPA Unpad. Masa kerja KPU berakhir.</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
